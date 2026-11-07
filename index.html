@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#202748">
+    <meta name="description" content="Explore Julia Slides, then enter an interactive scientific computing laboratory with Julia experiments and research projects.">
+    <title>Julia Field Lab | Julia Slides + Interactive Laboratory</title>
+    <link rel="icon" type="image/png" href="julia%20title.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="orbit-model.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to the mission</a>
+
+    <header class="elapsed-header" aria-label="Julia lab session progress">
+      <div class="elapsed-header-inner">
+        <div class="session-tools">
+          <span class="elapsed-clock" id="session-clock" aria-hidden="true">25:00</span>
+          <div class="theme-switch" role="group" aria-label="Color theme">
+            <button class="theme-option" type="button" data-theme-option="light" aria-pressed="true">Light</button>
+            <button class="theme-option" type="button" data-theme-option="dark" aria-pressed="false">Dark</button>
+          </div>
+        </div>
+        <div class="elapsed-progress" id="session-progress" role="progressbar" aria-label="Elapsed session time" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0" aria-valuetext="25 minutes remaining">
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="presentation-section progress-section" id="part-one" data-title="PART 1 / DISCOVER JULIA">
+        <div class="presentation-wrap">
+          <div class="presentation-heading">
+            <div class="presentation-copy">
+              <h1>Julia for scientific <span>computing.</span></h1>
+              <a class="presentation-open" href="Julia%20Slides.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Julia Slides PDF in a new tab">Take a look at our Julia Slides <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="part-two-intro" aria-labelledby="part-two-title">
+        <div class="part-two-inner">
+          <div class="part-two-content">
+            <figure class="scientist-art">
+              <img src="assets/scientist-guide-placeholder.png" alt="Scientist exploring a Julia code example">
+            </figure>
+            <div class="part-two-copy">
+              <h2 class="part-two-title" id="part-two-title">You are a scientist.</h2>
+              <div class="scientist-copy">
+                <p>You've just seen the Julia presentation. Julia's <span class="scientist-highlight">readable syntax</span>, <span class="scientist-highlight">numerical performance</span>, and <span class="scientist-highlight">ways to explore data and models</span> caught your attention, and now you want to learn how to use Julia in your own research.</p>
+                <p>You decide to start by installing Julia and trying a few simple examples.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="legacy-hidden" hidden>
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="chapter-number">01</span><span>THE CHALLENGE</span><span class="eyebrow-line"></span><span>FIELD ASSIGNMENT</span></div>
+            <p class="hero-intro">FIELD NOTE 001 <span>/</span> MOTION STUDY</p>
+            <h1>One launch.<br>Many unknowns.</h1>
+            <p class="hero-deck">Your first week on the research team starts with a deceptively simple question: where will the test payload land?</p>
+            <p class="hero-body">The team has a launcher, a set of measurements, and a field to clear. Your job is to model the flight, check the sensor readings, and turn the numbers into something everyone can trust.</p>
+            <div class="assignment">
+              <span class="assignment-mark" aria-hidden="true">!</span>
+              <div><b>YOUR ASSIGNMENT</b><p>Predict the trajectory before the next test window.</p></div>
+            </div>
+            <a class="text-link hero-link" href="#setup"><span>Find the right instrument</span><span aria-hidden="true">↓</span></a>
+          </div>
+
+          <div class="hero-scene">
+            <div class="scene-topline"><span>LIVE FIELD MODEL</span><span>SIMULATION 01 <i></i></span></div>
+            <div class="scene-visual">
+              <svg id="hero-trajectory" viewBox="0 0 700 430" role="img" aria-labelledby="hero-svg-title hero-svg-desc">
+                <title id="hero-svg-title">A projectile trajectory over a measured field</title>
+                <desc id="hero-svg-desc">A launch path curves over the field from the launch point to the predicted landing site.</desc>
+                <g class="plot-grid" aria-hidden="true">
+                  <path d="M70 35V360M170 35V360M270 35V360M370 35V360M470 35V360M570 35V360M670 35V360"/>
+                  <path d="M70 60H670M70 130H670M70 200H670M70 270H670M70 340H670"/>
+                </g>
+                <path class="field-line" d="M70 340H670"/>
+                <path class="trajectory-shadow" d="M90 340 C185 65 360 65 625 340"/>
+                <path class="trajectory-path" d="M90 340 C185 65 360 65 625 340"/>
+                <path class="aim-line" d="M90 340 L175 265"/>
+                <circle class="launch-point" cx="90" cy="340" r="7"/>
+                <circle class="target-point" cx="625" cy="340" r="8"/>
+                <circle class="apex-point" cx="355" cy="118" r="5"/>
+                <text x="77" y="382">LAUNCH</text>
+                <text x="574" y="382">LANDING ZONE</text>
+                <text x="383" y="106">APEX</text>
+                <text class="plot-axis" x="16" y="60">HEIGHT</text>
+                <text class="plot-axis" x="577" y="416">DISTANCE</text>
+                <g class="range-bracket" aria-hidden="true"><path d="M90 395V402H625V395"/><text x="315" y="422">PREDICTED RANGE</text></g>
+              </svg>
+              <div class="scene-coordinate coordinate-a">x 00.0 <span>m</span></div>
+              <div class="scene-coordinate coordinate-b">t + 2.4 <span>s</span></div>
+              <div class="scene-readout"><span>ESTIMATED RANGE</span><b>?</b><span>m</span></div>
+            </div>
+            <div class="scene-footer"><span>FIG 01.1</span><span>INITIAL CONDITIONS NOT YET VERIFIED</span><span>● STANDING BY</span></div>
+          </div>
+        </div>
+        <div class="hero-bottom"><span>RESEARCH STATION / NORTHERN RANGE</span><span>SCROLL TO BEGIN <span aria-hidden="true">↓</span></span></div>
+      </section>
+
+      <section class="legacy-hidden" hidden>
+        <div class="section-wrap">
+          <div class="section-head">
+            <div class="eyebrow dark-eyebrow"><span class="chapter-number">02</span><span>DISCOVERING JULIA</span><span class="eyebrow-line"></span><span>THE TOOL QUESTION</span></div>
+            <p class="section-index">BRIEFING / 02</p>
+          </div>
+          <div class="story-grid">
+            <div class="story-lead">
+              <p class="kicker">THE WORK IS GROWING</p>
+              <h2>A quick script is easy.<br>A fast research loop is harder.</h2>
+            </div>
+            <div class="story-body">
+              <p>One language makes the first analysis comfortable. Another may be needed when the model becomes a bottleneck. Moving between them means translating logic, maintaining two code paths, and slowing down the experiment.</p>
+              <p>You need a language that stays expressive while the calculations get serious. That's the problem Julia set out to tackle.</p>
+              <div class="question-line"><span>THE QUESTION</span><b>Can one language feel interactive and still compile efficient numerical code?</b></div>
+            </div>
+          </div>
+
+          <div class="reveal-row" id="julia-reveal">
+            <div class="reveal-label"><span class="reveal-signal"></span> SIGNAL FOUND</div>
+            <div class="reveal-copy"><span class="julia-wordmark">Julia<span>.</span></span><p>A high-level, dynamically typed language designed for technical computing, with a just-in-time compiler that specializes code for the types it sees.</p></div>
+            <div class="reveal-facts">
+              <div><span>01 / COMPOSE</span><b>Multiple dispatch</b><p>Methods can specialize on the types of all their arguments.</p></div>
+              <div><span>02 / COMPUTE</span><b>Compiled performance</b><p>Frequently called functions can compile to efficient native code. Types and function boundaries matter.</p></div>
+              <div><span>03 / EXPLORE</span><b>Interactive by design</b><p>Use the REPL to inspect data, test a calculation, and refine a model in small steps.</p></div>
+            </div>
+          </div>
+
+          <div class="comparison">
+            <div class="comparison-title"><span>THE TWO-LANGUAGE PROBLEM</span><span>AND JULIA'S APPROACH</span></div>
+            <div class="comparison-track">
+              <div class="language-stop"><span class="language-symbol python">Py</span><div><b>Explore in Python</b><span>Readable experiments</span></div></div>
+              <span class="comparison-arrow" aria-hidden="true">→</span>
+              <div class="language-stop"><span class="language-symbol cpp">C++</span><div><b>Rewrite for speed</b><span>Performance-critical core</span></div></div>
+              <span class="comparison-arrow comparison-arrow-julia" aria-hidden="true">→</span>
+              <div class="language-stop julia-stop"><span class="language-symbol julia-symbol">J</span><div><b>Explore and scale</b><span>One language, specialized compilation</span></div></div>
+            </div>
+            <p class="comparison-note">Not a promise that every Julia program is fast by default: warm-up, type stability, and good algorithm choices still count.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter setup-section" id="setup">
+        <div class="section-wrap">
+          <div class="setup-heading">
+            <div><h2>Install Julia</h2></div>
+            <p>For a typical installation, use <code>juliaup</code>, the official Julia version manager. Choose your operating system for the current instructions.</p>
+          </div>
+
+          <div class="os-picker" role="tablist" aria-label="Choose your operating system">
+            <button class="os-tab is-active" id="os-macos" type="button" role="tab" aria-selected="true" aria-controls="os-panel" data-os="macos">macOS</button>
+            <button class="os-tab" id="os-windows" type="button" role="tab" aria-selected="false" aria-controls="os-panel" data-os="windows" tabindex="-1">Windows</button>
+            <button class="os-tab" id="os-linux" type="button" role="tab" aria-selected="false" aria-controls="os-panel" data-os="linux" tabindex="-1">Linux</button>
+          </div>
+          <div class="os-panel" id="os-panel" role="tabpanel" aria-labelledby="os-macos">
+            <div class="os-instructions">
+              <ol class="setup-steps">
+                <li><span class="step-index">01</span><div><b>Install Julia</b><p id="install-copy">Open Terminal and run the official installer command:</p><div class="command-line"><code id="install-command">curl -fsSL https://install.julialang.org | sh</code><button class="copy-button" type="button" id="copy-install" aria-label="Copy install command" title="Copy command"><span aria-hidden="true">⧉</span></button></div><span class="step-note" id="install-note">Review the script before confirming the installer prompts.</span></div></li>
+                <li><span class="step-index">02</span><div><b>Launch the REPL</b><p>Open a new terminal window and enter:</p><div class="command-line command-short"><code id="launch-command">julia</code><button class="copy-button" type="button" id="copy-launch" aria-label="Copy launch command" title="Copy command"><span aria-hidden="true">⧉</span></button></div></div></li>
+                <li><span class="step-index">03</span><div><b>Run your first expression</b><p>At the <code>julia&gt;</code> prompt, evaluate a small calculation:</p><div class="repl-example"><span class="repl-prompt">julia&gt;</span><code>120 / 4</code><span class="repl-result">30.0</span></div><span class="step-note">Press Enter. Julia evaluates the expression and displays its value.</span></div></li>
+              </ol>
+            </div>
+            <aside class="setup-side">
+              <div class="terminal-goal">YOUR FIRST GOAL</div>
+              <div class="terminal-window" aria-label="Julia REPL example">
+                <div class="terminal-bar"><span></span><span></span><span></span><b>julia — REPL</b></div>
+                <div class="terminal-content"><p><span>julia&gt;</span> speed = 120 / 4</p><p class="terminal-output">30.0</p><p><span>julia&gt;</span> <i class="terminal-cursor"></i></p></div>
+                <div class="terminal-caption">THE READ–EVAL–PRINT LOOP</div>
+              </div>
+              <div class="editor-link">
+                <span class="editor-index">OPTIONAL / EDITOR</span>
+                <p>Prefer a full workspace? Install VS Code, then add the Julia extension by <code>julialang</code>. It can connect your editor to a Julia REPL.</p>
+                <a href="https://marketplace.visualstudio.com/items?itemName=julialang.language-julia" target="_blank" rel="noreferrer">Julia extension details <span aria-hidden="true">↗</span></a>
+              </div>
+            </aside>
+          </div>
+          <div class="setup-resources">
+            <a href="https://julialang.org/downloads/" target="_blank" rel="noreferrer"><span class="resource-label">OFFICIAL INSTALL GUIDE</span><b>Julia downloads &amp; setup <span aria-hidden="true">↗</span></b></a>
+            <a href="https://docs.julialang.org/en/v1/manual/getting-started/" target="_blank" rel="noreferrer"><span class="resource-label">FIRST STEPS</span><b>Julia manual: getting started <span aria-hidden="true">↗</span></b></a>
+          </div>
+          <div class="checkpoint" id="setup-checkpoint">
+            <input type="checkbox" id="setup-done" class="checkpoint-toggle" aria-label="Confirm Julia responds at the prompt">
+            <div><b>Workstation check</b><p>Julia responds at the prompt. Run the first measurement.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter experiments-section" id="experiments" data-title="JULIA'S DIFFERENCES">
+        <div class="section-wrap">
+          <div class="experiments-heading">
+            <div><h2>What makes Julia different?</h2></div>
+            <p>Julia combines readable, math-friendly syntax with high-performance numerical computing. These examples show how array operations, multiple dispatch, and macros work, along with tradeoffs such as compilation time.</p>
+          </div>
+          <div class="experiment-workbench">
+            <div class="experiment-tabs" role="tablist" aria-label="Julia language features">
+              <button class="experiment-tab is-active" id="exp-tab-0" type="button" role="tab" aria-selected="true" aria-controls="experiment-panel" data-exp="0"><span>A</span><b>Math syntax</b></button>
+              <button class="experiment-tab" id="exp-tab-1" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="1" tabindex="-1"><span>B</span><b>1-based arrays</b></button>
+              <button class="experiment-tab" id="exp-tab-2" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="2" tabindex="-1"><span>C</span><b>Broadcasting</b></button>
+              <button class="experiment-tab" id="exp-tab-3" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="3" tabindex="-1"><span>D</span><b>Dispatch</b></button>
+              <button class="experiment-tab" id="exp-tab-4" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="4" tabindex="-1"><span>E</span><b>JIT compile</b></button>
+              <button class="experiment-tab" id="exp-tab-5" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="5" tabindex="-1"><span>F</span><b>Macros</b></button>
+            </div>
+            <div class="experiment-panel" id="experiment-panel" data-exp="0" role="tabpanel" aria-labelledby="exp-tab-0">
+              <div class="experiment-explainer">
+                <h3 id="experiment-title">Let math read like math.</h3>
+                <p id="experiment-story">Julia keeps mathematical notation compact.</p>
+                <div class="concept-note"><span id="experiment-note-label">IMPLICIT MULTIPLICATION</span><p id="experiment-note">A number beside a variable implies multiplication: <code>2x</code> means <code>2 * x</code>. Between variables, write the operator: <code>x * y</code>.</p></div>
+                <div class="interactive-control" id="experiment-controls"></div>
+                <div class="concept-visual" id="concept-visual" aria-live="polite"></div>
+                <div class="experiment-output" id="experiment-output" aria-live="polite"></div>
+              </div>
+              <div class="code-column">
+                <div class="code-header"><span>JULIA_EXAMPLE.JL</span><button class="copy-button copy-code" type="button" aria-label="Copy Julia example" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block"><code id="experiment-code"></code></pre>
+                <div class="code-result"><span>ILLUSTRATIVE OUTPUT</span><pre id="experiment-result"></pre></div>
+              </div>
+              <div class="experiment-self-check">
+                <button class="self-check-trigger" id="self-check-trigger" type="button">Answer Question</button>
+              </div>
+            </div>
+          </div>
+          <dialog class="experiment-question-dialog" id="experiment-question-dialog" aria-labelledby="experiment-question">
+            <div class="question-screen">
+              <div class="question-screen-header">
+                <span id="question-screen-part">EXPERIMENT A / QUICK QUESTION</span>
+                <button class="question-screen-close" id="question-screen-close" type="button">Back to experiment</button>
+              </div>
+              <div class="question-screen-content">
+                <p class="question-screen-kicker">ANSWER FROM MEMORY</p>
+                <h2 id="experiment-question" tabindex="-1"></h2>
+                <div class="question-screen-answers" id="question-screen-answers" role="group" aria-label="Answer choices"></div>
+                <p class="question-screen-feedback" id="question-screen-feedback" aria-live="polite"></p>
+              </div>
+              <div class="question-screen-footer"><span>JULIA FIELD LAB</span><span>PART TWO / SELF-CHECK</span></div>
+            </div>
+          </dialog>
+          <div class="knowledge-check">
+            <button class="knowledge-check-toggle" id="quiz-toggle" type="button" aria-expanded="false" aria-controls="quiz-content">
+              <span class="check-label">QUICK CHECK / JULIA'S PITCH</span>
+              <span class="check-disclosure-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="knowledge-check-content" id="quiz-content" hidden>
+              <p class="knowledge-question">What problem was Julia designed to address?</p>
+              <div class="check-options" role="group" aria-label="Choose the problem Julia was designed to address">
+                <button type="button" data-answer="ecosystem">The need for one language per type of data</button>
+                <button type="button" data-answer="two-language">The need to prototype in one language and rewrite in a faster one</button>
+              </div>
+              <p class="check-feedback" id="quiz-feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter project-section" id="research-project" data-title="CHOOSE YOUR RESEARCH PROJECT">
+        <div class="section-wrap">
+          <div class="project-selector" id="project-selector" aria-labelledby="project-choice-title">
+            <div class="project-choice-heading">
+              <h2 id="project-choice-title">Choose an experiment.</h2>
+              <p>Which question would you like to explore?</p>
+            </div>
+            <div class="project-choice-grid" role="group" aria-label="Available experiments">
+              <button class="project-choice climate-choice" id="project-choice-climate" type="button" aria-controls="project-experience" data-project="climate">
+                <svg class="choice-visual" viewBox="0 0 220 88" aria-hidden="true">
+                  <path class="choice-gridline" d="M14 16H206M14 42H206M14 68H206M14 16V68M78 16V68M142 16V68M206 16V68"/>
+                  <path class="choice-axis" d="M14 68H206"/>
+                  <path class="choice-climate-line" d="M22 60L62 54L102 48L142 35L182 24L198 19"/>
+                  <circle class="choice-climate-point" cx="22" cy="60" r="3.5"/><circle class="choice-climate-point" cx="62" cy="54" r="3.5"/><circle class="choice-climate-point" cx="102" cy="48" r="3.5"/><circle class="choice-climate-point" cx="142" cy="35" r="3.5"/><circle class="choice-climate-point" cx="182" cy="24" r="3.5"/><circle class="choice-climate-point" cx="198" cy="19" r="3.5"/>
+                </svg>
+                <span class="project-choice-kind">DATA / TREND<span class="project-choice-check" role="img" aria-label="Completed"><span aria-hidden="true">✓</span></span></span>
+                <strong>Climate Data Analyzer</strong>
+                <span class="project-choice-description">Can a few measurements reveal a longer-term climate trend?</span>
+                <span class="project-choice-action">Explore climate data <span aria-hidden="true">→</span></span>
+              </button>
+              <button class="project-choice projectile-choice" id="project-choice-projectile" type="button" aria-controls="project-experience" data-project="projectile">
+                <svg class="choice-visual" viewBox="0 0 220 88" aria-hidden="true">
+                  <path class="choice-gridline" d="M14 16H206M14 42H206M14 68H206M14 16V68M78 16V68M142 16V68M206 16V68"/>
+                  <path class="choice-axis" d="M14 68H206"/>
+                  <path class="choice-flight-line" d="M24 63C61 60 67 19 112 19S166 61 195 64"/>
+                  <path class="choice-launch" d="M24 67L39 53"/>
+                  <circle class="choice-projectile-point" cx="24" cy="63" r="4"/><circle class="choice-target-point" cx="195" cy="64" r="4"/>
+                </svg>
+                <span class="project-choice-kind">MOTION / TRAJECTORY<span class="project-choice-check" role="img" aria-label="Completed"><span aria-hidden="true">✓</span></span></span>
+                <strong>Projectile Motion Simulator</strong>
+                <span class="project-choice-description">How do launch angle and speed shape a flight path?</span>
+                <span class="project-choice-action">Explore projectile motion <span aria-hidden="true">→</span></span>
+              </button>
+              <button class="project-choice orbit-choice" id="project-choice-orbit" type="button" aria-controls="project-experience" data-project="orbit">
+                <svg class="choice-visual" viewBox="0 0 220 88" aria-hidden="true">
+                  <path class="choice-gridline" d="M14 16H206M14 42H206M14 68H206"/>
+                  <ellipse class="choice-orbit-line" cx="111" cy="43" rx="77" ry="25"/>
+                  <circle class="choice-planet-halo" cx="111" cy="43" r="12"/>
+                  <circle class="choice-planet" cx="111" cy="43" r="7"/>
+                  <circle class="choice-satellite-halo" cx="179" cy="31" r="7"/>
+                  <circle class="choice-satellite" cx="179" cy="31" r="3.5"/>
+                </svg>
+                <span class="project-choice-kind">GRAVITY / ORBIT<span class="project-choice-check" role="img" aria-label="Completed"><span aria-hidden="true">✓</span></span></span>
+                <strong>Orbital Mechanics Simulator</strong>
+                <span class="project-choice-description">How do gravity and velocity shape a satellite's path?</span>
+                <span class="project-choice-action">Explore orbital motion <span aria-hidden="true">→</span></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="project-experience" id="project-experience" hidden>
+            <button class="project-back" id="project-choose-again" type="button"><span aria-hidden="true">←</span> Choose another experiment</button>
+            <div class="project-heading">
+              <div><h2 id="project-title" tabindex="-1"></h2></div>
+              <p id="project-intro"></p>
+            </div>
+
+            <div class="project-layout project-view" id="project-panel-projectile" role="region" aria-labelledby="project-title" hidden>
+              <div class="project-code">
+                <div class="code-header"><span>PROJECTILE_MODEL.JL</span><span class="code-language">JULIA / BASE</span><button class="copy-button" type="button" data-copy-target="#project-code" aria-label="Copy projectile Julia code" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block project-code-block"><code id="project-code"></code></pre>
+                <div class="project-explainer">
+                  <div><span>01 / FUNCTION</span><p>Break the equations into named, reusable calculations. The last expression in a Julia function is its return value.</p></div>
+                  <div><span>02 / LOOP</span><p>Visit each sampled height and keep the largest value as the trajectory apex.</p></div>
+                  <div><span>03 / BROADCAST</span><p><code>.</code> before a function call applies it elementwise across an array.</p></div>
+                  <div><span>04 / CONDITION</span><p>Use an <code>if</code> expression to turn a numerical result into a field decision.</p></div>
+                </div>
+              </div>
+              <div class="project-output">
+                <div class="output-header"><span>SIMULATION OUTPUT</span><span class="output-live"><i></i> LIVE MODEL</span></div>
+                <div class="project-flight-controls" aria-label="Adjust projectile conditions">
+                  <label for="project-velocity-slider">
+                    <span>INITIAL SPEED</span><b><output id="project-velocity-value">32</output> m/s</b>
+                    <input id="project-velocity-slider" type="range" min="12" max="55" value="32" step="1">
+                  </label>
+                  <label for="project-angle-slider">
+                    <span>LAUNCH ANGLE</span><b><output id="project-angle-value">58</output>°</b>
+                    <input id="project-angle-slider" type="range" min="15" max="75" value="58" step="1">
+                  </label>
+                  <label for="project-gravity-slider">
+                    <span>GRAVITY</span><b><output id="project-gravity-value">9.81</output> m/s²</b>
+                    <input id="project-gravity-slider" type="range" min="1.62" max="15" value="9.81" step="0.01">
+                  </label>
+                  <div class="project-gravity-presets" role="group" aria-label="Set gravity for a planet">
+                    <span>ENVIRONMENT</span>
+                    <button type="button" data-gravity="9.81" class="is-selected" aria-pressed="true">Earth</button>
+                    <button type="button" data-gravity="1.62" aria-pressed="false">Moon</button>
+                    <button type="button" data-gravity="3.71" aria-pressed="false">Mars</button>
+                  </div>
+                </div>
+                <div class="project-canvas">
+                  <div class="project-metric"><span>LANDING STATUS</span><b id="landing-status">WITHIN FIELD</b></div>
+                  <svg id="project-plot" viewBox="0 0 500 300" role="img" aria-label="Final projectile simulation visualization">
+                    <g id="project-grid" class="plot-grid plot-grid-light"></g>
+                    <path class="flight-ground project-ground" d="M34 250H474"/>
+                    <path id="project-curve" class="flight-curve" d=""/>
+                    <path class="safe-zone" d="M34 255V260H420V255"/>
+                    <circle class="project-start" cx="34" cy="250" r="4"/>
+                    <g id="projectile-marker" class="projectile-marker" aria-hidden="true"><circle r="7"/><path d="M-12 0H12M0 -12V12"/></g>
+                    <circle id="project-end" class="flight-end" cx="0" cy="250" r="5"/>
+                    <text x="33" y="278">0 m</text><text x="392" y="278">FIELD LIMIT 150 m</text>
+                  </svg>
+                  <p class="output-caption">LIVE FROM PROJECT CONDITIONS</p>
+                </div>
+                <div class="project-result-grid"><div><span>RANGE</span><b><output id="project-range">93.8</output> m</b></div><div><span>FLIGHT TIME</span><b><output id="project-time">5.53</output> s</b></div><div><span>MAX HEIGHT</span><b><output id="project-height">37.5</output> m</b></div></div>
+                <button type="button" class="run-button" id="replay-flight"><span aria-hidden="true">▶</span> Replay trajectory</button>
+              </div>
+              <div class="project-completion">
+                <label class="project-completion-control">
+                  <input type="checkbox" data-project-completion="projectile" aria-controls="project-choice-projectile">
+                  <span>Mark this experiment complete</span>
+                </label>
+              </div>
+            </div>
+            <div class="project-layout project-view climate-view" id="project-panel-climate" role="region" aria-labelledby="project-title" hidden>
+              <div class="project-code">
+                <div class="code-header"><span>CLIMATE_TREND.JL</span><span class="code-language">JULIA / STATISTICS</span><button class="copy-button" type="button" data-copy-target="#climate-project-code" aria-label="Copy climate Julia code" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block project-code-block"><code id="climate-project-code"></code></pre>
+                <div class="project-explainer">
+                  <div><span>01 / PACKAGE</span><p><code>Statistics</code> supplies the mean for a compact summary of the readings.</p></div>
+                  <div><span>02 / ARRAYS</span><p>Year and anomaly arrays keep each observation aligned by position.</p></div>
+                  <div><span>03 / RATE</span><p>Divide the end-to-end change by the elapsed decades to compare the trend.</p></div>
+                  <div><span>04 / DECISION</span><p>An <code>if</code> expression labels the latest value against a teaching threshold.</p></div>
+                </div>
+              </div>
+              <div class="project-output climate-output">
+                <div class="output-header"><span>CLIMATE DATA ANALYZER</span><span class="output-live"><i></i> LIVE MODEL</span></div>
+                <div class="climate-controls">
+                  <label for="latest-anomaly"><span>2025 anomaly</span><b><output id="latest-anomaly-value">1.20</output> °C</b></label>
+                  <input id="latest-anomaly" type="range" min="0.8" max="1.8" value="1.2" step="0.05">
+                </div>
+                <div class="climate-chart-wrap">
+                  <svg id="climate-plot" viewBox="0 0 520 285" role="img" aria-label="Synthetic temperature anomalies from 2000 through 2025">
+                    <g id="climate-grid"></g>
+                    <path id="climate-area" class="climate-area" d=""></path>
+                    <path id="climate-line" class="climate-line" d=""></path>
+                    <g id="climate-points"></g>
+                    <g id="climate-labels"></g>
+                    <text class="climate-axis-title" x="18" y="24">ANOMALY °C</text>
+                  </svg>
+                </div>
+                <div class="climate-metrics">
+                  <div><span>MEAN ANOMALY</span><b><output id="climate-mean">0.70</output> °C</b></div>
+                  <div><span>CHANGE / DECADE</span><b><output id="climate-rate">0.31</output> °C</b></div>
+                  <div><span>THRESHOLD</span><b id="climate-assessment">BELOW</b></div>
+                </div>
+                <p class="output-caption">SYNTHETIC TEACHING DATA / NOT AN OFFICIAL CLIMATE RECORD</p>
+              </div>
+              <div class="project-completion">
+                <label class="project-completion-control">
+                  <input type="checkbox" data-project-completion="climate" aria-controls="project-choice-climate">
+                  <span>Mark this experiment complete</span>
+                </label>
+              </div>
+            </div>
+            <div class="project-layout project-view orbit-view" id="project-panel-orbit" role="region" aria-labelledby="project-title" hidden>
+              <div class="project-code">
+                <div class="code-header"><span>ORBITAL_MOTION.JL</span><span class="code-language">JULIA / NUMERICS</span><button class="copy-button" type="button" data-copy-target="#orbit-project-code" aria-label="Copy orbital mechanics Julia code" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block project-code-block"><code id="orbit-project-code"></code></pre>
+                <div class="project-explainer">
+                  <div><span>01 / VARIABLES</span><p><code>distance</code>, <code>speed</code>, and <code>mu</code> are the initial conditions and gravitational parameter, in km and seconds.</p></div>
+                  <div><span>02 / FUNCTION</span><p><code>acceleration</code> applies Newton's inverse-square gravity toward the planet.</p></div>
+                  <div><span>03 / ARRAYS</span><p><code>positions</code> stores a 2D coordinate vector at each integration step.</p></div>
+                  <div><span>04 / LOOP</span><p>A velocity-Verlet loop advances position and velocity, appending each new sample.</p></div>
+                  <div><span>05 / MATH</span><p>Orbital energy and circular/escape speeds distinguish bound paths from escape. Speed starts tangent to the orbit.</p></div>
+                </div>
+              </div>
+              <div class="project-output orbit-output">
+                <div class="output-header"><span>ORBITAL MECHANICS</span><span class="output-live"><i></i> LIVE MODEL</span></div>
+                <div class="orbit-chart-wrap">
+                  <div class="orbit-status"><span>PATH CLASSIFICATION</span><b id="orbit-type" aria-live="polite">ELLIPTICAL ORBIT</b></div>
+                  <button class="orbit-animation-toggle" id="orbit-animation-toggle" type="button" aria-label="Pause orbital animation" title="Pause orbital animation"><span id="orbit-animation-icon" aria-hidden="true">Ⅱ</span></button>
+                  <svg id="orbit-plot" viewBox="0 0 620 400" role="img" aria-label="Satellite tracing an elliptical orbit around Earth">
+                    <g class="orbit-reference" aria-hidden="true">
+                      <circle cx="310" cy="200" r="55"></circle>
+                      <circle cx="310" cy="200" r="105"></circle>
+                      <circle cx="310" cy="200" r="150"></circle>
+                      <path d="M155 200H465M310 45V355"></path>
+                    </g>
+                    <circle id="orbit-earth-halo" class="orbit-earth-halo" cx="310" cy="200" r="70"></circle>
+                    <circle id="orbit-earth" class="orbit-earth" cx="310" cy="200" r="68"></circle>
+                    <path id="orbit-trajectory" class="orbit-trajectory" d=""></path>
+                    <circle id="orbit-origin" class="orbit-origin" cx="460" cy="200" r="3"></circle>
+                    <circle id="orbit-satellite-halo" class="orbit-satellite-halo" cx="460" cy="200" r="9"></circle>
+                    <circle id="orbit-satellite" class="orbit-satellite" cx="460" cy="200" r="4"></circle>
+                    <text class="orbit-earth-label" x="310" y="205" text-anchor="middle">EARTH</text>
+                    <text class="orbit-distance-label" x="310" y="378" text-anchor="middle">DISTANCE SHOWN TO SCALE</text>
+                  </svg>
+                  <div class="orbit-legend"><span><i class="legend-earth"></i>Earth</span><span><i class="legend-orbit"></i>Path</span><span><i class="legend-satellite"></i>Satellite</span></div>
+                </div>
+                <div class="orbit-presets" role="group" aria-label="Choose an orbital behavior">
+                  <button type="button" data-orbit-preset="circular">Stable orbit</button>
+                  <button type="button" data-orbit-preset="elliptical" class="is-selected">Elliptical</button>
+                  <button type="button" data-orbit-preset="escape">Escape</button>
+                </div>
+                <div class="orbit-controls">
+                  <label for="orbit-distance">
+                    <span>STARTING DISTANCE FROM EARTH'S CENTER</span><b><output id="orbit-distance-value">14,000</output> km</b>
+                    <input id="orbit-distance" type="range" min="8000" max="36000" value="14000" step="500">
+                  </label>
+                  <label for="orbit-speed">
+                    <span>INITIAL TANGENTIAL SPEED</span><b><output id="orbit-speed-value">4.70</output> km/s</b>
+                    <input id="orbit-speed" type="range" min="0.5" max="15" value="4.7" step="0.05">
+                  </label>
+                  <label for="orbit-gravity">
+                    <span>GRAVITATIONAL STRENGTH</span><b><output id="orbit-gravity-value">1.00</output> × Earth</b>
+                    <input id="orbit-gravity" type="range" min="0.5" max="1.5" value="1" step="0.05">
+                  </label>
+                </div>
+                <div class="orbit-metrics">
+                  <div><span>CIRCULAR SPEED</span><b><output id="orbit-circular-speed">5.34</output> km/s</b></div>
+                  <div><span>ESCAPE SPEED</span><b><output id="orbit-escape-speed">7.55</output> km/s</b></div>
+                  <div><span>IDEAL PERIOD</span><b><output id="orbit-period">3.38</output> h</b></div>
+                </div>
+                <p class="output-caption orbit-model-note">PLANAR TWO-BODY MODEL / POINT-MASS EARTH / FIXED 6371 KM IMPACT RADIUS. Tangential start; no atmosphere or perturbations. Spatially scaled path; accelerated animation.</p>
+              </div>
+              <div class="project-completion">
+                <label class="project-completion-control">
+                  <input type="checkbox" data-project-completion="orbit" aria-controls="project-choice-orbit">
+                  <span>Mark this experiment complete</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter finish-section" id="mission-complete">
+        <div class="finish-inner">
+          <div class="finish-content">
+            <div><h2>Continue learning<br><span>Julia.</span></h2></div>
+            <div class="finish-summary"><p>Consult the Julia Manual for language details, find tutorials for guided practice, or install Julia to run the examples in a REPL.</p><div class="finish-links"><span>JULIA RESOURCES</span><a href="https://docs.julialang.org/en/v1/" target="_blank" rel="noreferrer">The Julia Manual <span aria-hidden="true">↗</span></a><a href="https://julialang.org/learning/" target="_blank" rel="noreferrer">Julia learning resources <span aria-hidden="true">↗</span></a><a href="https://julialang.org/downloads/" target="_blank" rel="noreferrer">Downloads and installation <span aria-hidden="true">↗</span></a></div></div>
+          </div>
+          <footer class="finish-footer"><a href="#top">RETURN TO JULIA SLIDES ↑</a></footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
