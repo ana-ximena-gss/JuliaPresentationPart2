@@ -176,8 +176,6 @@
 
 ## 6. Close
 
-"We started with a single calculation in the REPL and used Julia ideas to build a model we can run, inspect, and change. The next step in real research would be to test the model's assumptions against measurements."
+"We moved from a simple REPL calculation to a Julia model we can run and change. Along the way, we used multiple dispatch to distinguish plant types, broadcasting and arrays to follow soil water through the week, and a macro to inspect the simulation."
 
-"Which assumption would you want to measure or refine first?"
-
-"To keep learning Julia, the getting-started guide and Julia Manual are good places to go next."
+"That's a useful first step: take a research question, express it clearly in Julia, and use a model to explore how changing the inputs changes the result."
