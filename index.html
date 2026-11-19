@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1c3b2a">
+    <meta name="description" content="Explore Julia's scientific computing features through a plant physiologist's drought-response scenario and a simplified, interactive soil-water model.">
+    <title>Julia Field Lab | Julia for Plant Science</title>
+    <link rel="icon" type="image/png" href="julia%20title.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="orbit-model.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to the mission</a>
+
+    <header class="elapsed-header" aria-label="Julia lab session progress">
+      <div class="elapsed-header-inner">
+        <div class="session-tools">
+          <div class="theme-switch" role="group" aria-label="Color theme">
+            <button class="theme-option" type="button" data-theme-option="light" aria-pressed="true">Light</button>
+            <button class="theme-option" type="button" data-theme-option="dark" aria-pressed="false">Dark</button>
+          </div>
+        </div>
+        <div class="elapsed-progress" id="session-progress" role="progressbar" aria-label="Elapsed session time" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0" aria-valuetext="0 minutes elapsed">
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+          <span class="session-dot" aria-hidden="true"></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="presentation-section progress-section" id="part-one" data-title="PART 1 / DISCOVER JULIA">
+        <div class="presentation-wrap">
+          <div class="presentation-heading">
+            <div class="presentation-copy">
+              <h1>Julia for scientific <span>computing.</span></h1>
+              <a class="presentation-open" href="Julia%20Slides.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Julia Slides PDF in a new tab">Take a look at our Julia Slides <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="part-two-intro" id="part-two-intro" aria-labelledby="part-two-title">
+        <div class="part-two-inner">
+          <div class="part-two-content">
+            <figure class="scientist-art">
+              <img src="assets/scientist-guide-placeholder.png" alt="Plant physiologist exploring a Julia code example">
+            </figure>
+            <div class="part-two-copy">
+              <h2 class="part-two-title" id="part-two-title"><span class="role-title-emphasis">You are a</span> plant physiologist.</h2>
+              <div class="scientist-copy">
+                <p>You've just seen our Julia slides, and Julia's <strong class="scientist-highlight">readable syntax</strong> and <strong class="scientist-highlight">high-performance numerical computing</strong> caught your attention. Now you're eager to explore how it could help you work with data and build models for your plant research.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="legacy-hidden" hidden>
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="chapter-number">01</span><span>THE CHALLENGE</span><span class="eyebrow-line"></span><span>FIELD ASSIGNMENT</span></div>
+            <p class="hero-intro">FIELD NOTE 001 <span>/</span> MOTION STUDY</p>
+            <h1>One launch.<br>Many unknowns.</h1>
+            <p class="hero-deck">Your first week on the research team starts with a deceptively simple question: where will the test payload land?</p>
+            <p class="hero-body">The team has a launcher, a set of measurements, and a field to clear. Your job is to model the flight, check the sensor readings, and turn the numbers into something everyone can trust.</p>
+            <div class="assignment">
+              <span class="assignment-mark" aria-hidden="true">!</span>
+              <div><b>YOUR ASSIGNMENT</b><p>Predict the trajectory before the next test window.</p></div>
+            </div>
+            <a class="text-link hero-link" href="#setup"><span>Find the right instrument</span><span aria-hidden="true">↓</span></a>
+          </div>
+
+          <div class="hero-scene">
+            <div class="scene-topline"><span>LIVE FIELD MODEL</span><span>SIMULATION 01 <i></i></span></div>
+            <div class="scene-visual">
+              <svg id="hero-trajectory" viewBox="0 0 700 430" role="img" aria-labelledby="hero-svg-title hero-svg-desc">
+                <title id="hero-svg-title">A projectile trajectory over a measured field</title>
+                <desc id="hero-svg-desc">A launch path curves over the field from the launch point to the predicted landing site.</desc>
+                <g class="plot-grid" aria-hidden="true">
+                  <path d="M70 35V360M170 35V360M270 35V360M370 35V360M470 35V360M570 35V360M670 35V360"/>
+                  <path d="M70 60H670M70 130H670M70 200H670M70 270H670M70 340H670"/>
+                </g>
+                <path class="field-line" d="M70 340H670"/>
+                <path class="trajectory-shadow" d="M90 340 C185 65 360 65 625 340"/>
+                <path class="trajectory-path" d="M90 340 C185 65 360 65 625 340"/>
+                <path class="aim-line" d="M90 340 L175 265"/>
+                <circle class="launch-point" cx="90" cy="340" r="7"/>
+                <circle class="target-point" cx="625" cy="340" r="8"/>
+                <circle class="apex-point" cx="355" cy="118" r="5"/>
+                <text x="77" y="382">LAUNCH</text>
+                <text x="574" y="382">LANDING ZONE</text>
+                <text x="383" y="106">APEX</text>
+                <text class="plot-axis" x="16" y="60">HEIGHT</text>
+                <text class="plot-axis" x="577" y="416">DISTANCE</text>
+                <g class="range-bracket" aria-hidden="true"><path d="M90 395V402H625V395"/><text x="315" y="422">PREDICTED RANGE</text></g>
+              </svg>
+              <div class="scene-coordinate coordinate-a">x 00.0 <span>m</span></div>
+              <div class="scene-coordinate coordinate-b">t + 2.4 <span>s</span></div>
+              <div class="scene-readout"><span>ESTIMATED RANGE</span><b>?</b><span>m</span></div>
+            </div>
+            <div class="scene-footer"><span>FIG 01.1</span><span>INITIAL CONDITIONS NOT YET VERIFIED</span><span>● STANDING BY</span></div>
+          </div>
+        </div>
+        <div class="hero-bottom"><span>RESEARCH STATION / NORTHERN RANGE</span><span>SCROLL TO BEGIN <span aria-hidden="true">↓</span></span></div>
+      </section>
+
+      <section class="legacy-hidden" hidden>
+        <div class="section-wrap">
+          <div class="section-head">
+            <div class="eyebrow dark-eyebrow"><span class="chapter-number">02</span><span>DISCOVERING JULIA</span><span class="eyebrow-line"></span><span>THE TOOL QUESTION</span></div>
+            <p class="section-index">BRIEFING / 02</p>
+          </div>
+          <div class="story-grid">
+            <div class="story-lead">
+              <p class="kicker">THE WORK IS GROWING</p>
+              <h2>A quick script is easy.<br>A fast research loop is harder.</h2>
+            </div>
+            <div class="story-body">
+              <p>One language makes the first analysis comfortable. Another may be needed when the model becomes a bottleneck. Moving between them means translating logic, maintaining two code paths, and slowing down the experiment.</p>
+              <p>You need a language that stays expressive while the calculations get serious. That's the problem Julia set out to tackle.</p>
+              <div class="question-line"><span>THE QUESTION</span><b>Can one language feel interactive and still compile efficient numerical code?</b></div>
+            </div>
+          </div>
+
+          <div class="reveal-row" id="julia-reveal">
+            <div class="reveal-label"><span class="reveal-signal"></span> SIGNAL FOUND</div>
+            <div class="reveal-copy"><span class="julia-wordmark">Julia<span>.</span></span><p>A high-level, dynamically typed language designed for technical computing, with a just-in-time compiler that specializes code for the types it sees.</p></div>
+            <div class="reveal-facts">
+              <div><span>01 / COMPOSE</span><b>Multiple dispatch</b><p>Methods can specialize on the types of all their arguments.</p></div>
+              <div><span>02 / COMPUTE</span><b>Compiled performance</b><p>Frequently called functions can compile to efficient native code. Types and function boundaries matter.</p></div>
+              <div><span>03 / EXPLORE</span><b>Interactive by design</b><p>Use the REPL to inspect data, test a calculation, and refine a model in small steps.</p></div>
+            </div>
+          </div>
+
+          <div class="comparison">
+            <div class="comparison-title"><span>THE TWO-LANGUAGE PROBLEM</span><span>AND JULIA'S APPROACH</span></div>
+            <div class="comparison-track">
+              <div class="language-stop"><span class="language-symbol python">Py</span><div><b>Explore in Python</b><span>Readable experiments</span></div></div>
+              <span class="comparison-arrow" aria-hidden="true">→</span>
+              <div class="language-stop"><span class="language-symbol cpp">C++</span><div><b>Rewrite for speed</b><span>Performance-critical core</span></div></div>
+              <span class="comparison-arrow comparison-arrow-julia" aria-hidden="true">→</span>
+              <div class="language-stop julia-stop"><span class="language-symbol julia-symbol">J</span><div><b>Explore and scale</b><span>One language, specialized compilation</span></div></div>
+            </div>
+            <p class="comparison-note">Not a promise that every Julia program is fast by default: warm-up, type stability, and good algorithm choices still count.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter setup-section" id="setup">
+        <div class="section-wrap">
+          <div class="setup-heading">
+            <h2 class="setup-introduction"><img class="setup-intro-mark" src="assets/plant-sprout.png" alt=""><span>You decide to start by installing Julia.</span></h2>
+          </div>
+
+          <div class="os-picker" role="tablist" aria-label="Choose your operating system">
+            <button class="os-tab is-active" id="os-macos-linux" type="button" role="tab" aria-selected="true" aria-controls="os-panel" data-os="macos-linux">macOS &amp; Linux</button>
+            <button class="os-tab" id="os-windows" type="button" role="tab" aria-selected="false" aria-controls="os-panel" data-os="windows" tabindex="-1">Windows</button>
+          </div>
+          <div class="os-panel" id="os-panel" role="tabpanel" aria-labelledby="os-macos-linux">
+            <div class="os-instructions">
+              <ol class="setup-steps">
+                <li><span class="step-index">01</span><div><b>Install Julia</b><p id="install-copy">Open Terminal and run the official installer command:</p><div class="command-line"><code id="install-command">curl -fsSL https://install.julialang.org | sh</code><button class="copy-button" type="button" id="copy-install" aria-label="Copy install command" title="Copy command"><span aria-hidden="true">⧉</span></button></div><span class="step-note" id="install-note">Review the script before confirming the installer prompts.</span></div></li>
+                <li><span class="step-index">02</span><div><b>Launch the REPL</b><p>Open a new terminal window and enter:</p><div class="command-line command-short"><code id="launch-command">julia</code><button class="copy-button" type="button" id="copy-launch" aria-label="Copy launch command" title="Copy command"><span aria-hidden="true">⧉</span></button></div></div></li>
+                <li><span class="step-index">03</span><div><b>Run your first expression</b><p>At the <code>julia&gt;</code> prompt, evaluate a small calculation:</p><div class="repl-example"><span class="repl-prompt">julia&gt;</span><code>120 / 4</code><span class="repl-result">30.0</span></div><span class="step-note">Press Enter. Julia evaluates the expression and displays its value.</span></div></li>
+              </ol>
+            </div>
+          </div>
+          <div class="setup-resources">
+            <a href="https://julialang.org/downloads/" target="_blank" rel="noreferrer"><span class="resource-label">OFFICIAL INSTALL GUIDE</span><b>Julia downloads &amp; setup <span aria-hidden="true">↗</span></b></a>
+            <a href="https://docs.julialang.org/en/v1/manual/getting-started/" target="_blank" rel="noreferrer"><span class="resource-label">FIRST STEPS</span><b>Julia manual: getting started <span aria-hidden="true">↗</span></b></a>
+          </div>
+          <section class="workspace-section" id="workspace" aria-labelledby="workspace-title">
+            <div class="workspace-heading">
+              <h3 id="workspace-title"><img class="workspace-heading-icon" src="assets/workspace-sprout.png" alt=""><span>Where will you write Julia?</span></h3>
+              <p>Use the REPL for quick calculations, or choose an editor or notebook for larger Julia projects.</p>
+            </div>
+            <div class="workspace-options">
+              <article class="workspace-option">
+                <span class="workspace-number">01 / NOTEBOOK</span>
+                <h4>Pluto.jl</h4>
+                <div class="workspace-visual workspace-visual-notebook" aria-hidden="true">
+                  <div class="notebook-preview-top"><span>RAINFALL NOTEBOOK</span><span>CELLS UPDATE LIVE</span></div>
+                  <div class="notebook-preview-cell">
+                    <span class="notebook-cell-mark">01</span>
+                    <code>rain_mm = [0, 4, 0, 12]</code>
+                  </div>
+                  <div class="notebook-preview-cell notebook-preview-output">
+                    <span class="notebook-cell-mark">02</span>
+                    <div><b>weekly_total</b><code>sum(rain_mm) = 16</code></div>
+                    <div class="notebook-preview-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  </div>
+                </div>
+                <p>Explore Julia in reactive notebook cells that combine code, results, and explanation. Run it locally with Julia installed.</p>
+                <a href="https://plutojl.org/" target="_blank" rel="noreferrer">Pluto.jl <span aria-hidden="true">↗</span></a>
+              </article>
+              <article class="workspace-option">
+                <span class="workspace-number">02 / IN YOUR BROWSER</span>
+                <h4>Try Pluto online</h4>
+                <div class="workspace-visual workspace-visual-browser" aria-hidden="true">
+                  <div class="browser-preview-top"><span class="browser-preview-dots"><i></i><i></i><i></i></span><span class="browser-preview-address">binder.plutojl.org</span></div>
+                  <div class="browser-preview-body">
+                    <div><span class="browser-preview-label">HOSTED JULIA</span><b>Start a notebook</b><span>Runs in your browser</span></div>
+                    <span class="browser-preview-launch">Launch <b aria-hidden="true">↗</b></span>
+                  </div>
+                  <div class="browser-preview-path"><span>YOUR BROWSER</span><i aria-hidden="true">→</i><span>PLUTO SESSION</span></div>
+                </div>
+                <p>Open a hosted Pluto session without installing Julia. Startup can take a little while, and files are not saved to the cloud.</p>
+                <a href="https://binder.plutojl.org/" target="_blank" rel="noreferrer">Launch browser session <span aria-hidden="true">↗</span></a>
+              </article>
+              <article class="workspace-option">
+                <span class="workspace-number">03 / LOCAL EDITOR</span>
+                <h4>VS Code + Julia</h4>
+                <div class="workspace-visual workspace-visual-editor" aria-hidden="true">
+                  <div class="editor-preview-top">
+                    <span class="editor-preview-file">garden.jl</span>
+                    <span class="editor-preview-language">JULIA</span>
+                  </div>
+                  <div class="editor-preview-code">
+                    <span class="editor-preview-gutter">1<br>2<br>3</span>
+                    <code><span><i>rain_mm</i> = [0, 4, 0, 12]</span><span><b>weekly_total</b> = sum(rain_mm)</span><span>println(weekly_total)</span></code>
+                  </div>
+                  <div class="editor-preview-repl"><span>julia&gt;</span><code>weekly_total</code><b>16 mm</b></div>
+                </div>
+                <p>Keep a Julia file, terminal, and REPL together. Install Julia first, then add the Julia extension.</p>
+                <a href="https://code.visualstudio.com/docs/languages/julia" target="_blank" rel="noreferrer">Julia support in VS Code <span aria-hidden="true">↗</span></a>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter experiments-section" id="experiments" data-title="JULIA'S DIFFERENCES">
+        <div class="section-wrap">
+          <div class="experiments-heading">
+            <h2 class="lesson-section-title">
+              <span>Let's experiment with Julia:</span>
+              <span class="lesson-file-reference"><span class="lesson-julia-mark" aria-hidden="true"><i></i><i></i><i></i></span><code>garden_week.jl</code></span>
+            </h2>
+          </div>
+          <div class="lesson-progress">
+            <div class="lesson-progress-track" id="lesson-progress-track" role="progressbar" aria-label="Julia code pieces completed" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="lesson-progress-fill"></span></div>
+            <ol class="lesson-step-list" id="lesson-step-list" aria-label="Julia lessons and complete code">
+              <li><button class="lesson-step-button" type="button" data-lesson-indicator="dispatch" aria-current="step"><span>01</span><b>Dispatch</b></button></li>
+              <li><button class="lesson-step-button" type="button" data-lesson-indicator="jit"><span>02</span><b>JIT compile</b></button></li>
+              <li><button class="lesson-step-button" type="button" data-lesson-indicator="math"><span>03</span><b>Math syntax</b></button></li>
+              <li><button class="lesson-step-button" type="button" data-lesson-indicator="broadcast"><span>04</span><b>Broadcasting</b></button></li>
+              <li><button class="lesson-step-button" type="button" data-lesson-indicator="arrays"><span>05</span><b>1-based arrays</b></button></li>
+              <li><button class="lesson-step-button" type="button" data-lesson-indicator="macros"><span>06</span><b>Macros</b></button></li>
+              <li><button class="lesson-step-button" id="lesson-step-complete-code" type="button" data-lesson-indicator="complete-code"><span>07</span><b>Complete code</b></button></li>
+            </ol>
+          </div>
+          <div class="lesson-workbench">
+            <section class="lesson-prompt-panel" id="lesson-prompt-panel" aria-labelledby="lesson-title">
+              <div class="lesson-active" id="lesson-active">
+                <div class="lesson-view-tabs" role="tablist" aria-label="Lesson step views">
+                  <button class="lesson-view-tab" id="lesson-tab-lesson" type="button" role="tab" aria-selected="false" aria-controls="lesson-concept-panel" tabindex="-1" data-lesson-view="lesson">Lesson</button>
+                  <button class="lesson-view-tab is-active" id="lesson-tab-code" type="button" role="tab" aria-selected="true" aria-controls="lesson-code-panel" tabindex="0" data-lesson-view="code">Code</button>
+                  <button class="lesson-view-tab" id="lesson-tab-comparison" type="button" role="tab" aria-selected="false" aria-controls="lesson-comparison-panel" tabindex="-1" data-lesson-view="comparison" hidden>Comparison</button>
+                  <button class="lesson-view-tab" id="lesson-tab-comparison-2" type="button" role="tab" aria-selected="false" aria-controls="lesson-comparison-panel-2" tabindex="-1" data-lesson-view="comparison2" hidden>Comparison 2</button>
+                </div>
+                <div class="lesson-concept-panel" id="lesson-concept-panel" role="tabpanel" aria-labelledby="lesson-tab-lesson" tabindex="0" hidden></div>
+                <div class="lesson-code-view" id="lesson-code-panel" role="tabpanel" aria-labelledby="lesson-tab-code">
+                  <h3 id="lesson-title">How can Julia choose a dry-soil limit for each plant?</h3>
+                  <pre class="lesson-context-code" id="lesson-context-code"><code>abstract type Plant end
+struct Lettuce &lt;: Plant end
+struct Cactus &lt;: Plant end
+
+# DISPATCH: Plant type selects the matching dry-limit method.</code></pre>
+                  <p class="lesson-story" id="lesson-story" hidden></p>
+                  <p class="lesson-explanation" id="lesson-explanation" hidden></p>
+                  <form class="lesson-answer-form" id="lesson-answer-form">
+                    <div class="lesson-answer-item">
+                      <p class="lesson-question" id="lesson-question">Complete the method signatures that set the <span class="lesson-plant-emphasis">lettuce</span> 🥬 and <span class="lesson-plant-emphasis">cactus</span> 🌵 thresholds.</p>
+                      <div class="lesson-answer-line">
+                        <code id="lesson-prefix">dry_limit(::</code>
+                        <input id="lesson-answer" name="lesson-answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Missing Julia code for this method" aria-describedby="lesson-answer-hint lesson-feedback" required>
+                        <code id="lesson-suffix">) = 5.0</code>
+                      </div>
+                    </div>
+                    <div class="lesson-answer-item" id="lesson-follow-up">
+                      <div class="lesson-answer-line">
+                        <code id="lesson-follow-up-prefix">dry_limit(::</code>
+                        <input id="lesson-follow-up-answer" name="lesson-follow-up-answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Missing Julia code for cactus dry-limit method" aria-describedby="lesson-answer-hint lesson-feedback">
+                        <code id="lesson-follow-up-suffix">) = 2.0</code>
+                      </div>
+                    </div>
+                    <p class="lesson-answer-hint" id="lesson-answer-hint">Use the plant type names exactly as shown above.</p>
+                    <div class="lesson-answer-actions"><button class="lesson-check-button" id="lesson-check" type="submit">Check answer</button></div>
+                  </form>
+                  <p class="lesson-feedback" id="lesson-feedback" aria-live="polite"></p>
+                  <div class="lesson-reveal" id="lesson-reveal" hidden>
+                    <pre class="lesson-piece-code"><code id="lesson-piece-code"></code></pre>
+                    <div class="lesson-piece-actions">
+                      <button class="copy-button lesson-copy-button" id="lesson-copy-piece" type="button" data-copy-target="#lesson-piece-code" aria-label="Copy this Julia code piece" title="Copy code" disabled><span aria-hidden="true">⧉</span><span data-copy-label>Copy code</span></button>
+                    </div>
+                  </div>
+                  <button class="lesson-next-button" id="lesson-next" type="button" hidden>Next Julia idea <span aria-hidden="true">→</span></button>
+                </div>
+                <section class="lesson-comparison-panel" id="lesson-comparison-panel" role="tabpanel" aria-labelledby="lesson-tab-comparison" tabindex="0" hidden></section>
+                <section class="lesson-comparison-panel" id="lesson-comparison-panel-2" role="tabpanel" aria-labelledby="lesson-tab-comparison-2" tabindex="0" hidden></section>
+              </div>
+              <div class="lesson-finish" id="lesson-finish" aria-labelledby="lesson-finish-title" hidden>
+                <h3 id="lesson-finish-title">Run the program you built.</h3>
+                <div class="lesson-run-guide">
+                  <p>Save the source below as <code>garden_week.jl</code>. In Terminal, move into that folder, then run:</p>
+                  <div class="command-line lesson-run-command">
+                    <code id="lesson-run-command">julia garden_week.jl</code>
+                    <button class="copy-button" type="button" data-copy-target="#lesson-run-command" aria-label="Copy Julia run command" title="Copy command"><span aria-hidden="true">⧉</span></button>
+                  </div>
+                </div>
+                <div class="lesson-code-panel" aria-label="Complete Julia program">
+                  <div class="lesson-code-header"><span>GARDEN_WEEK.JL</span><span>JULIA / BASE</span></div>
+                  <pre class="lesson-built-code"><code id="lesson-complete-code"></code></pre>
+                  <div class="lesson-code-footer">
+                    <span>Optional complete-source reference</span>
+                    <button class="copy-button lesson-copy-button" id="lesson-copy-full" type="button" data-copy-target="#lesson-complete-code" aria-label="Copy complete Julia program" title="Copy complete program"><span aria-hidden="true">⧉</span><span data-copy-label>Copy full program</span></button>
+                  </div>
+                </div>
+                <a class="lesson-open-garden" id="lesson-open-garden" href="#garden-workbench">Open the garden model <span aria-hidden="true">↓</span></a>
+              </div>
+            </section>
+          </div>
+          <dialog class="case-sensitivity-dialog" id="case-sensitivity-dialog" aria-labelledby="case-sensitivity-title" aria-describedby="case-sensitivity-message">
+            <div class="case-sensitivity-content">
+              <p class="case-sensitivity-kicker">JULIA SYNTAX NOTE</p>
+              <h2 id="case-sensitivity-title">Julia is case-sensitive.</h2>
+              <p id="case-sensitivity-message">Uppercase and lowercase letters are different. Match the type name exactly:</p>
+              <ul class="case-sensitivity-examples" id="case-sensitivity-examples"></ul>
+              <button class="case-sensitivity-close" id="case-sensitivity-close" type="button">Return to answer</button>
+            </div>
+          </dialog>
+          <div class="legacy-lesson" hidden>
+          <div class="experiment-workbench">
+            <div class="experiment-tabs" role="tablist" aria-label="Julia language features">
+              <button class="experiment-tab is-active" id="exp-tab-0" type="button" role="tab" aria-selected="true" aria-controls="experiment-panel" data-exp="0"><span>A</span><b>Math syntax</b></button>
+              <button class="experiment-tab" id="exp-tab-1" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="1" tabindex="-1"><span>B</span><b>1-based arrays</b></button>
+              <button class="experiment-tab" id="exp-tab-2" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="2" tabindex="-1"><span>C</span><b>Broadcasting</b></button>
+              <button class="experiment-tab" id="exp-tab-3" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="3" tabindex="-1"><span>D</span><b>Dispatch</b></button>
+              <button class="experiment-tab" id="exp-tab-4" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="4" tabindex="-1"><span>E</span><b>JIT compile</b></button>
+              <button class="experiment-tab" id="exp-tab-5" type="button" role="tab" aria-selected="false" aria-controls="experiment-panel" data-exp="5" tabindex="-1"><span>F</span><b>Macros</b></button>
+            </div>
+            <div class="experiment-panel" id="experiment-panel" data-exp="0" role="tabpanel" aria-labelledby="exp-tab-0">
+              <div class="experiment-explainer">
+                <h3 id="experiment-title">Let math read like math.</h3>
+                <p id="experiment-story">Julia keeps mathematical notation compact.</p>
+                <div class="concept-note"><span id="experiment-note-label">IMPLICIT MULTIPLICATION</span><p id="experiment-note">A number beside a variable implies multiplication: <code>2x</code> means <code>2 * x</code>. Between variables, write the operator: <code>x * y</code>.</p></div>
+                <div class="interactive-control" id="experiment-controls"></div>
+                <div class="concept-visual" id="concept-visual" aria-live="polite"></div>
+                <div class="experiment-output" id="experiment-output" aria-live="polite"></div>
+              </div>
+              <div class="code-column">
+                <div class="code-header"><span>JULIA_EXAMPLE.JL</span><button class="copy-button copy-code" type="button" aria-label="Copy Julia example" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block"><code id="experiment-code"></code></pre>
+                <div class="code-result"><span>ILLUSTRATIVE OUTPUT</span><pre id="experiment-result"></pre></div>
+              </div>
+              <div class="experiment-self-check">
+                <button class="self-check-trigger" id="self-check-trigger" type="button">Answer Question</button>
+              </div>
+            </div>
+          </div>
+          <dialog class="experiment-question-dialog" id="experiment-question-dialog" aria-labelledby="experiment-question">
+            <div class="question-screen">
+              <div class="question-screen-header">
+                <span id="question-screen-part">EXPERIMENT A / QUICK QUESTION</span>
+                <button class="question-screen-close" id="question-screen-close" type="button">Back to experiment</button>
+              </div>
+              <div class="question-screen-content">
+                <p class="question-screen-kicker">ANSWER FROM MEMORY</p>
+                <h2 id="experiment-question" tabindex="-1"></h2>
+                <div class="question-screen-answers" id="question-screen-answers" role="group" aria-label="Answer choices"></div>
+                <p class="question-screen-feedback" id="question-screen-feedback" aria-live="polite"></p>
+              </div>
+              <div class="question-screen-footer"><span>JULIA FIELD LAB</span><span>PART TWO / SELF-CHECK</span></div>
+            </div>
+          </dialog>
+          <div class="knowledge-check">
+            <button class="knowledge-check-toggle" id="quiz-toggle" type="button" aria-expanded="false" aria-controls="quiz-content">
+              <span class="check-label">QUICK CHECK / JULIA'S PITCH</span>
+              <span class="check-disclosure-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="knowledge-check-content" id="quiz-content" hidden>
+              <p class="knowledge-question">What problem was Julia designed to address?</p>
+              <div class="check-options" role="group" aria-label="Choose the problem Julia was designed to address">
+                <button type="button" data-answer="ecosystem">The need for one language per type of data</button>
+                <button type="button" data-answer="two-language">The need to prototype in one language and rewrite in a faster one</button>
+              </div>
+              <p class="check-feedback" id="quiz-feedback" aria-live="polite"></p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter project-section" id="research-project" data-title="LET'S PUT IT ALL TOGETHER">
+        <div class="section-wrap">
+          <div class="project-selector" id="project-selector" aria-labelledby="project-choice-title">
+            <div class="project-choice-heading">
+              <h2 id="project-choice-title"><img class="project-choice-heading-icon" src="assets/leaf-icon.png" alt="">Can your plant make it through a <span class="project-choice-weather-emphasis">changing week of weather</span><img class="project-choice-weather-icon" src="assets/water-drop-icon.png" alt=""></h2>
+            </div>
+          </div>
+
+          <div class="project-layout garden-workbench" id="garden-workbench">
+            <div class="project-output garden-output">
+              <div class="garden-inputs">
+                <div class="garden-primary-controls">
+                  <fieldset class="garden-plant-picker">
+                    <legend>PLANT SPECIES</legend>
+                    <div class="garden-plant-options">
+                      <label><input type="radio" name="garden-plant" value="lettuce" checked><span>Lettuce</span></label>
+                      <label><input type="radio" name="garden-plant" value="cactus"><span>Cactus</span></label>
+                    </div>
+                  </fieldset>
+                  <label class="garden-temperature" for="garden-temperature">
+                    <span>AIR TEMPERATURE</span><b><output id="garden-temperature-value" for="garden-temperature">25</output> °C</b>
+                    <input id="garden-temperature" type="range" min="10" max="40" value="25" step="1">
+                  </label>
+                </div>
+                <div class="garden-rain-heading"><span>DAILY RAINFALL</span><span>MM</span></div>
+                <div class="garden-rain-controls" role="group" aria-label="Rainfall for each day of the week">
+                  <label class="garden-rain-control" for="garden-rain-1"><span>DAY 1</span><b><output id="garden-rain-value-1" for="garden-rain-1">8</output></b><input id="garden-rain-1" data-garden-rain type="range" min="0" max="12" value="8" step="1" aria-label="Day 1 rainfall"></label>
+                  <label class="garden-rain-control" for="garden-rain-2"><span>DAY 2</span><b><output id="garden-rain-value-2" for="garden-rain-2">1</output></b><input id="garden-rain-2" data-garden-rain type="range" min="0" max="12" value="1" step="1" aria-label="Day 2 rainfall"></label>
+                  <label class="garden-rain-control" for="garden-rain-3"><span>DAY 3</span><b><output id="garden-rain-value-3" for="garden-rain-3">4</output></b><input id="garden-rain-3" data-garden-rain type="range" min="0" max="12" value="4" step="1" aria-label="Day 3 rainfall"></label>
+                  <label class="garden-rain-control" for="garden-rain-4"><span>DAY 4</span><b><output id="garden-rain-value-4" for="garden-rain-4">0</output></b><input id="garden-rain-4" data-garden-rain type="range" min="0" max="12" value="0" step="1" aria-label="Day 4 rainfall"></label>
+                  <label class="garden-rain-control" for="garden-rain-5"><span>DAY 5</span><b><output id="garden-rain-value-5" for="garden-rain-5">6</output></b><input id="garden-rain-5" data-garden-rain type="range" min="0" max="12" value="6" step="1" aria-label="Day 5 rainfall"></label>
+                  <label class="garden-rain-control" for="garden-rain-6"><span>DAY 6</span><b><output id="garden-rain-value-6" for="garden-rain-6">2</output></b><input id="garden-rain-6" data-garden-rain type="range" min="0" max="12" value="2" step="1" aria-label="Day 6 rainfall"></label>
+                  <label class="garden-rain-control" for="garden-rain-7"><span>DAY 7</span><b><output id="garden-rain-value-7" for="garden-rain-7">5</output></b><input id="garden-rain-7" data-garden-rain type="range" min="0" max="12" value="5" step="1" aria-label="Day 7 rainfall"></label>
+                </div>
+              </div>
+              <div class="garden-chart-section">
+                <div class="garden-chart-heading"><span>SOIL WATER</span><span>CAPACITY / 20 MM</span></div>
+                <div class="garden-chart" id="garden-chart" role="img" aria-label="Soil water by day">
+                  <div class="garden-chart-bars" aria-hidden="true">
+                    <div class="garden-chart-column"><span class="garden-bar-value" data-garden-value></span><span class="garden-bar-track"><span class="garden-bar-fill"></span></span><span class="garden-bar-day">1</span></div>
+                    <div class="garden-chart-column"><span class="garden-bar-value" data-garden-value></span><span class="garden-bar-track"><span class="garden-bar-fill"></span></span><span class="garden-bar-day">2</span></div>
+                    <div class="garden-chart-column"><span class="garden-bar-value" data-garden-value></span><span class="garden-bar-track"><span class="garden-bar-fill"></span></span><span class="garden-bar-day">3</span></div>
+                    <div class="garden-chart-column"><span class="garden-bar-value" data-garden-value></span><span class="garden-bar-track"><span class="garden-bar-fill"></span></span><span class="garden-bar-day">4</span></div>
+                    <div class="garden-chart-column"><span class="garden-bar-value" data-garden-value></span><span class="garden-bar-track"><span class="garden-bar-fill"></span></span><span class="garden-bar-day">5</span></div>
+                    <div class="garden-chart-column"><span class="garden-bar-value" data-garden-value></span><span class="garden-bar-track"><span class="garden-bar-fill"></span></span><span class="garden-bar-day">6</span></div>
+                    <div class="garden-chart-column"><span class="garden-bar-value" data-garden-value></span><span class="garden-bar-track"><span class="garden-bar-fill"></span></span><span class="garden-bar-day">7</span></div>
+                  </div>
+                </div>
+                <div class="garden-chart-axis"><span>0</span><span>20 mm</span></div>
+              </div>
+              <div class="garden-readouts">
+                <div class="garden-status" id="garden-status" data-state="moist" aria-live="polite"><span>MODEL STATUS</span><b id="garden-outlook">WITHIN LIMIT</b></div>
+                <div><span>DRY DAYS</span><b><output id="garden-dry-days">0</output> / 7</b></div>
+                <div><span>DAY 7 WATER</span><b><output id="garden-final-water">18.5</output> mm</b></div>
+              </div>
+              <p class="garden-output-caption" id="garden-summary">Soil is below the selected plant's illustrative threshold on 0 of 7 days.</p>
+            </div>
+
+            <div class="project-code garden-code">
+              <div class="garden-code-export">
+                <pre class="project-code-block garden-code-block garden-code-preview"><code id="garden-code-preview"></code></pre>
+                <button class="copy-button garden-copy-button" type="button" data-copy-target="#garden-code" aria-label="Copy full garden Julia program" title="Copy full Julia program"><span aria-hidden="true">⧉</span><span data-copy-label>Copy full program</span></button>
+              </div>
+              <figure class="garden-plant-visual" id="garden-plant-visual" data-plant="lettuce" data-state="within-limit">
+                <img id="garden-plant-image" src="assets/lettuce.png" alt="Lettuce within-limit illustration" decoding="async">
+              </figure>
+              <pre class="project-code-block garden-code-block" hidden><code id="garden-code"></code></pre>
+            </div>
+          </div>
+
+          <details class="garden-deep-dive garden-deep-dive-parent">
+            <summary>
+              <span class="garden-deep-dive-heading">
+                <span class="garden-deep-dive-title">More Julia ideas to explore</span>
+              </span>
+              <span class="garden-deep-dive-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="garden-deep-dive-content">
+              <p class="garden-deep-dive-intro">These examples continue from <code>rain</code>, <code>plant</code>, and <code>result</code> in the program we just ran.</p>
+              <details class="garden-deep-dive garden-deep-dive-child">
+                <summary>
+                  <span class="garden-deep-dive-heading">
+                    <span class="garden-deep-dive-label">01 / TESTING</span>
+                    <span class="garden-deep-dive-title">Check what the model promises</span>
+                  </span>
+                  <span class="garden-deep-dive-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="garden-deep-dive-content">
+                  <article class="garden-deep-dive-topic">
+                    <p>Julia's standard-library <code>Test</code> package groups checks in a test set. These assertions catch broken dimensions, impossible water values, or an inconsistent dry-day count.</p>
+                    <pre><code>using Test
+
+@testset "garden week invariants" begin
+    @test length(result.soil) == length(rain)
+    @test all(water -&gt; 0.0 &lt;= water &lt;= 20.0, result.soil)
+    @test result.dry_days ==
+        count(water -&gt; water &lt; dry_limit(plant), result.soil)
+end</code></pre>
+                  </article>
+                </div>
+              </details>
+              <details class="garden-deep-dive garden-deep-dive-child">
+                <summary>
+                  <span class="garden-deep-dive-heading">
+                    <span class="garden-deep-dive-label">02 / LANGUAGE COMPARISON</span>
+                    <span class="garden-deep-dive-title">Julia and Python, side by side</span>
+                  </span>
+                  <span class="garden-deep-dive-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="garden-deep-dive-content">
+                  <div class="garden-language-grid">
+                    <article class="garden-language-topic">
+                      <h4>Choosing a plant threshold</h4>
+                      <div class="garden-language-pair">
+                        <div>
+                          <span class="garden-language-name julia">JULIA / MULTIPLE DISPATCH</span>
+                          <pre><code>dry_limit(::Lettuce) = 5.0
+dry_limit(::Cactus) = 2.0</code></pre>
+                        </div>
+                        <div>
+                          <span class="garden-language-name python">PYTHON / EXPLICIT BRANCHES</span>
+                          <pre><code>def dry_limit(plant):
+    if isinstance(plant, Lettuce):
+        return 5.0
+    if isinstance(plant, Cactus):
+        return 2.0
+    raise TypeError("Unknown plant")</code></pre>
+                        </div>
+                      </div>
+                      <p>This Python example uses explicit branches. Python also offers <code>singledispatch</code> for dispatch on the first argument, while Julia's built-in method system can select a method from the types of all positional arguments.</p>
+                    </article>
+
+                    <article class="garden-language-topic">
+                      <h4>Subtracting evaporation from every day</h4>
+                      <div class="garden-language-pair">
+                        <div>
+                          <span class="garden-language-name julia">JULIA / BROADCAST</span>
+                          <pre><code>daily_change = rain .- evaporation</code></pre>
+                        </div>
+                        <div>
+                          <span class="garden-language-name python">PYTHON / NUMPY</span>
+                          <pre><code>import numpy as np
+daily_change = np.asarray(rain) - evaporation</code></pre>
+                        </div>
+                      </div>
+                      <p>Both examples broadcast a scalar across an array. Julia marks elementwise work with dots; NumPy provides similar array behavior in Python. A regular Python list does not subtract a scalar this way.</p>
+                    </article>
+                  </div>
+                  <div class="garden-deep-dive-links">
+                    <a href="https://docs.julialang.org/en/v1/manual/methods/" target="_blank" rel="noreferrer">Julia methods and dispatch <span aria-hidden="true">↗</span></a>
+                    <a href="https://docs.python.org/3/library/functools.html#functools.singledispatch" target="_blank" rel="noreferrer">Python single dispatch <span aria-hidden="true">↗</span></a>
+                    <a href="https://numpy.org/doc/stable/user/basics.broadcasting.html" target="_blank" rel="noreferrer">NumPy broadcasting <span aria-hidden="true">↗</span></a>
+                  </div>
+                </div>
+              </details>
+              <details class="garden-deep-dive garden-deep-dive-child">
+                <summary>
+                  <span class="garden-deep-dive-heading">
+                    <span class="garden-deep-dive-label">03 / LANGUAGE COMPARISON</span>
+                    <span class="garden-deep-dive-title">Julia and C: the two-language problem</span>
+                  </span>
+                  <span class="garden-deep-dive-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="garden-deep-dive-content">
+                  <article class="garden-c-comparison">
+                    <p class="garden-c-comparison-intro">The same array update can be written at different levels: Julia states the elementwise operation, while C spells out the loop and destination storage.</p>
+                    <div class="garden-c-code-grid">
+                      <div class="garden-c-code-column">
+                        <span class="garden-language-name julia">JULIA / ARRAY BROADCAST</span>
+                        <pre><code>daily_change = rain .- evaporation</code></pre>
+                      </div>
+                      <div class="garden-c-code-column">
+                        <span class="garden-language-name c">C / EXPLICIT ARRAY LOOP</span>
+                        <pre><code>#include &lt;stddef.h&gt;
+
+void subtract_evaporation(const double *rain,
+                          double evaporation,
+                          double *daily_change,
+                          size_t count)
+{
+    for (size_t day = 0; day &lt; count; ++day) {
+        daily_change[day] = rain[day] - evaporation;
+    }
+}</code></pre>
+                      </div>
+                    </div>
+                    <p class="garden-c-output-note">Julia's broadcast creates a result array. In C, the caller supplies writable output storage and the element count.</p>
+                    <aside class="garden-two-language-note">
+                      <span class="garden-two-language-label">THE TWO-LANGUAGE PROBLEM</span>
+                      <p>Some scientific workflows prototype in a high-level language, then rewrite performance-critical parts in C or Fortran. Julia is designed to support high-level exploration and performance-oriented numerical code in one language. That's a design goal, not a speed guarantee: performance depends on the code and workload.</p>
+                    </aside>
+                    <div class="garden-deep-dive-links">
+                      <a href="https://docs.julialang.org/en/v1/manual/performance-tips/" target="_blank" rel="noreferrer">Julia performance tips <span aria-hidden="true">↗</span></a>
+                      <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html" target="_blank" rel="noreferrer">GNU C Reference Manual <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </article>
+                </div>
+              </details>
+              <details class="garden-deep-dive garden-deep-dive-child">
+                <summary>
+                  <span class="garden-deep-dive-heading">
+                    <span class="garden-deep-dive-label">04 / PERFORMANCE TEST</span>
+                    <span class="garden-deep-dive-title">Julia vs Python: the garden model, timed</span>
+                  </span>
+                  <span class="garden-deep-dive-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div class="garden-deep-dive-content">
+                  <article class="garden-deep-dive-topic garden-benchmark">
+                    <details class="garden-benchmark-previous">
+                      <summary>Previous benchmark results</summary>
+                      <div class="garden-benchmark-previous-content">
+                        <p class="garden-benchmark-claim"><strong>For this garden model, Julia ran about 14× faster.</strong> It took 6.4 ms; Python took 90.3 ms to simulate the same one million days.</p>
+                        <div class="garden-benchmark-chart" role="group" aria-label="Runtime comparison for one million simulated days">
+                          <p class="garden-benchmark-chart-title">Runtime for one million days <span>Less time means faster</span></p>
+                          <div class="garden-benchmark-row">
+                            <span class="garden-benchmark-language julia">Julia <small>1.13.3</small></span>
+                            <div class="garden-benchmark-track" aria-hidden="true"><span class="garden-benchmark-bar julia" style="width: 7.1%"></span></div>
+                            <strong class="garden-benchmark-value">6.4 ms</strong>
+                          </div>
+                          <div class="garden-benchmark-row">
+                            <span class="garden-benchmark-language python">Python <small>3.14.7</small></span>
+                            <div class="garden-benchmark-track" aria-hidden="true"><span class="garden-benchmark-bar python" style="width: 100%"></span></div>
+                            <strong class="garden-benchmark-value">90.3 ms</strong>
+                          </div>
+                        </div>
+                        <p class="garden-benchmark-check"><strong>The checked results matched:</strong> both produced 183,954 dry days, and their first, middle, and last soil-water values were equal.</p>
+                        <p class="garden-benchmark-scope">This test uses Julia arrays and regular Python lists, without NumPy. Other workloads and Python libraries can change the result.</p>
+                      </div>
+                    </details>
+                    <details class="garden-benchmark-details">
+                      <summary>How did we test it?</summary>
+                      <div class="garden-benchmark-details-content">
+                        <div class="garden-benchmark-presentation" data-benchmark-presentation>
+                          <div class="garden-benchmark-slide-tabs" role="tablist" aria-label="Benchmark explanation slides">
+                            <button class="garden-benchmark-slide-tab is-active" id="garden-benchmark-tab-setup" type="button" role="tab" aria-selected="true" aria-controls="garden-benchmark-slide-setup" tabindex="0" data-benchmark-tab>01 Setup</button>
+                            <button class="garden-benchmark-slide-tab" id="garden-benchmark-tab-code" type="button" role="tab" aria-selected="false" aria-controls="garden-benchmark-slide-code" tabindex="-1" data-benchmark-tab>02 Benchmark code</button>
+                            <button class="garden-benchmark-slide-tab" id="garden-benchmark-tab-run" type="button" role="tab" aria-selected="false" aria-controls="garden-benchmark-slide-run" tabindex="-1" data-benchmark-tab>03 Run</button>
+                            <button class="garden-benchmark-slide-tab" id="garden-benchmark-tab-calculator" type="button" role="tab" aria-selected="false" aria-controls="garden-benchmark-slide-calculator" tabindex="-1" data-benchmark-tab>04 Calculator</button>
+                          </div>
+                          <div class="garden-benchmark-slide-stage">
+                        <section class="garden-benchmark-slide" id="garden-benchmark-slide-setup" role="tabpanel" aria-labelledby="garden-benchmark-tab-setup" tabindex="0" data-benchmark-panel>
+                          <p class="garden-benchmark-slide-number">01 / TEST DESIGN</p>
+                          <h3 class="garden-benchmark-slide-title" id="garden-benchmark-setup-title">Same task. Same conditions.</h3>
+                          <dl class="garden-benchmark-method-grid">
+                            <div>
+                              <dt>Workload</dt>
+                              <dd>One million identical rainfall values run through the same soil-water model.</dd>
+                            </div>
+                            <div>
+                              <dt>Timing</dt>
+                              <dd>Five timed runs per launch, across five fresh launches. We compared the median of those five medians.</dd>
+                            </div>
+                            <div>
+                              <dt>Excluded</dt>
+                              <dd>Program startup and rainfall input creation.</dd>
+                            </div>
+                          </dl>
+                        </section>
+                        <section class="garden-benchmark-slide" id="garden-benchmark-slide-run" role="tabpanel" aria-labelledby="garden-benchmark-tab-run" tabindex="0" data-benchmark-panel hidden>
+                          <p class="garden-benchmark-slide-number">03 / RUN THE TEST</p>
+                          <h3 class="garden-benchmark-slide-title" id="garden-benchmark-run-title">Run both programs</h3>
+                          <p class="garden-benchmark-slide-lead">Run the benchmark-specific files shown on slide 02, not the small interactive program in “07 Complete code.” Use the folder containing both benchmark files. Compare warmed medians, not first-call times: Julia's first call includes compilation.</p>
+                          <div class="garden-benchmark-command-grid">
+                            <div class="garden-benchmark-command-row">
+                              <span>JULIA</span>
+                              <pre class="garden-benchmark-command"><code>julia --startup-file=no garden_week.jl</code></pre>
+                            </div>
+                            <div class="garden-benchmark-command-row">
+                              <span>PYTHON</span>
+                              <pre class="garden-benchmark-command"><code>python3 garden_week.py</code></pre>
+                            </div>
+                          </div>
+                          <div class="garden-benchmark-output-disclosures">
+                            <details class="garden-benchmark-output-details" data-benchmark-output-details>
+                              <summary>Julia output: what each value means</summary>
+                              <div class="garden-benchmark-output-content">
+                                <p class="garden-benchmark-slide-lead">The benchmark prints a run summary, followed by a check of the model results:</p>
+                                <pre class="garden-benchmark-command garden-benchmark-output-sample"><code>Julia VERSION | days=COUNT | first_model_call_ms=VALUE | warmed_median_ms=VALUE | repeats=COUNT
+CHECK dry_days=COUNT first=VALUE middle=VALUE last=VALUE</code></pre>
+                                <dl class="garden-benchmark-output-guide">
+                                  <div>
+                                    <dt>first_model_call_ms</dt>
+                                    <dd>Milliseconds for the first simulation call. Julia compiles a specialized method for these input types on first use; later calls can reuse it.</dd>
+                                  </div>
+                                  <div>
+                                    <dt>warmed_median_ms</dt>
+                                    <dd>Median across repeated timings after warm-up. This is the Julia value to enter in the calculator.</dd>
+                                  </div>
+                                  <div>
+                                    <dt>days / repeats</dt>
+                                    <dd>How many rainfall values were simulated and how many timed runs were sampled.</dd>
+                                  </div>
+                                  <div>
+                                    <dt>CHECK</dt>
+                                    <dd><code>dry_days</code> and selected soil-water values. They should match Python's check line.</dd>
+                                  </div>
+                                </dl>
+                                <p class="garden-benchmark-slide-lead">Julia's trade-off: readable high-level code can run quickly after compilation, with some extra latency on the first call.</p>
+                                <p class="garden-benchmark-first-call-note"><strong>If you run “07 Complete code” instead:</strong> its small interactive example prints an <code>@time</code> line with elapsed seconds and allocations. That's expected, but it is not the million-day benchmark output.</p>
+                              </div>
+                            </details>
+                            <details class="garden-benchmark-output-details" data-benchmark-output-details>
+                              <summary>Python output: what each value means</summary>
+                              <div class="garden-benchmark-output-content">
+                                <p class="garden-benchmark-slide-lead">The first line identifies the run and reports timings. The <code>CHECK</code> line lets you verify the model result:</p>
+                                <pre class="garden-benchmark-command garden-benchmark-output-sample"><code>Python CPython VERSION | days=COUNT | first_model_call_ms=VALUE | warmed_median_ms=VALUE | repeats=COUNT | native_jit=STATUS
+CHECK dry_days=COUNT first=VALUE middle=VALUE last=VALUE</code></pre>
+                                <dl class="garden-benchmark-output-guide">
+                                  <div>
+                                    <dt>Python / days</dt>
+                                    <dd>Python implementation and version, followed by the number of simulated days.</dd>
+                                  </div>
+                                  <div>
+                                    <dt>first_model_call_ms</dt>
+                                    <dd>Milliseconds for the first call. It provides context but is not the steady-state comparison.</dd>
+                                  </div>
+                                  <div>
+                                    <dt>warmed_median_ms</dt>
+                                    <dd>Median across repeated timings after warm-up. Compare this with Julia's warmed median and use it in the calculator.</dd>
+                                  </div>
+                                  <div>
+                                    <dt>repeats / native_jit</dt>
+                                    <dd>Number of timed runs, and whether this CPython build's optional native JIT is available or enabled.</dd>
+                                  </div>
+                                  <div>
+                                    <dt>CHECK</dt>
+                                    <dd><code>dry_days</code> and selected soil-water values. Matching checks confirm both programs completed the same calculation.</dd>
+                                  </div>
+                                </dl>
+                              </div>
+                            </details>
+                          </div>
+                        </section>
+                        <section class="garden-benchmark-slide" id="garden-benchmark-slide-calculator" role="tabpanel" aria-labelledby="garden-benchmark-tab-calculator" tabindex="0" data-benchmark-panel data-benchmark-calculator hidden>
+                          <p class="garden-benchmark-slide-number">04 / LIVE COMPARISON</p>
+                          <h3 class="garden-benchmark-slide-title" id="garden-benchmark-calculator-title">Compare your warmed timings</h3>
+                          <p class="garden-benchmark-slide-lead">Enter each script's <code>warmed_median_ms</code> in milliseconds. The median is more reliable than a mean when one run is unusually slow or fast. For a steadier live result, run each script several times and enter the median of its warmed medians.</p>
+                          <div class="garden-benchmark-calculator-inputs">
+                            <label class="garden-benchmark-calculator-field" for="garden-benchmark-julia-ms">
+                              <span>Julia warmed median</span>
+                              <span class="garden-benchmark-number-input">
+                                <input id="garden-benchmark-julia-ms" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter milliseconds">
+                                <span aria-hidden="true">ms</span>
+                              </span>
+                            </label>
+                            <label class="garden-benchmark-calculator-field" for="garden-benchmark-python-ms">
+                              <span>Python warmed median</span>
+                              <span class="garden-benchmark-number-input">
+                                <input id="garden-benchmark-python-ms" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter milliseconds">
+                                <span aria-hidden="true">ms</span>
+                              </span>
+                            </label>
+                          </div>
+                          <p class="garden-benchmark-calculator-result" id="garden-benchmark-calculator-result" aria-live="polite">Enter both warmed medians to compare the runs.</p>
+                          <div class="garden-benchmark-calculator-chart" id="garden-benchmark-calculator-chart" role="group" aria-label="Live runtime comparison" hidden>
+                            <p class="garden-benchmark-chart-title">Time per simulation <span>Shorter bar means less time</span></p>
+                            <div class="garden-benchmark-calculator-row">
+                              <span class="garden-benchmark-language julia">Julia</span>
+                              <div class="garden-benchmark-track" aria-hidden="true"><span class="garden-benchmark-bar julia" id="garden-benchmark-julia-bar"></span></div>
+                              <output class="garden-benchmark-value" id="garden-benchmark-julia-value">-- ms</output>
+                            </div>
+                            <div class="garden-benchmark-calculator-row">
+                              <span class="garden-benchmark-language python">Python</span>
+                              <div class="garden-benchmark-track" aria-hidden="true"><span class="garden-benchmark-bar python" id="garden-benchmark-python-bar"></span></div>
+                              <output class="garden-benchmark-value" id="garden-benchmark-python-value">-- ms</output>
+                            </div>
+                          </div>
+                        </section>
+                        <section class="garden-benchmark-slide" id="garden-benchmark-slide-code" role="tabpanel" aria-labelledby="garden-benchmark-tab-code" tabindex="0" data-benchmark-panel hidden>
+                          <p class="garden-benchmark-slide-number">02 / BENCHMARK CODE</p>
+                          <h3 class="garden-benchmark-slide-title" id="garden-benchmark-code-title">Benchmark scripts and references</h3>
+                          <p class="garden-benchmark-slide-lead">These are the million-day scripts used in the live comparison. Copy either one here; “07 Complete code” is a separate interactive lesson program.</p>
+                        <details class="garden-benchmark-source-details">
+                          <summary>View the Python code used in the test</summary>
+                          <div class="garden-benchmark-source-content">
+                            <div class="garden-benchmark-source-header">
+                              <span>GARDEN_WEEK.PY / PYTHON</span>
+                              <button class="copy-button garden-copy-button garden-benchmark-copy" type="button" data-copy-target="#garden-python-benchmark-source" aria-label="Copy Python benchmark code" title="Copy Python code"><span aria-hidden="true">⧉</span><span data-copy-label>Copy Python code</span></button>
+                            </div>
+                            <pre class="garden-benchmark-source-code"><code id="garden-python-benchmark-source">"""Dependency-free Python counterpart to garden_week.jl's soil-water model."""
+
+import gc
+import os
+import platform
+import statistics
+import sys
+import time
+
+
+class Plant:
+    __slots__ = ()
+
+
+class Lettuce(Plant):
+    __slots__ = ()
+
+
+class Cactus(Plant):
+    __slots__ = ()
+
+
+def dry_limit(plant: Plant) -&gt; float:
+    # Julia selects a dry_limit method by plant type; this Python counterpart
+    # expresses the same choice with explicit isinstance branches.
+    if isinstance(plant, Lettuce):
+        return 5.0
+    if isinstance(plant, Cactus):
+        return 2.0
+    raise TypeError("Unknown plant")
+
+
+def simulate(rain: list[float], plant: Plant, temperature: float):
+    evaporation = 0.1 * temperature
+
+    # Julia writes `rain .- evaporation`; built-in Python lists need this
+    # comprehension to apply the same scalar subtraction to every rainfall value.
+    daily_change = [value - evaporation for value in rain]
+
+    # Julia's first array index is 1; Python's is 0, so day zero seeds the recurrence.
+    soil = [0.0] * len(rain)
+    initial_water = 10.0 + daily_change[0]
+    soil[0] = min(20.0, max(0.0, initial_water))
+    for day in range(1, len(rain)):
+        water = soil[day - 1] + daily_change[day]
+        if water &lt; 0.0:
+            water = 0.0
+        elif water &gt; 20.0:
+            water = 20.0
+        soil[day] = water
+
+    limit = dry_limit(plant)
+    # This counts the same threshold matches as Julia's count(predicate, soil).
+    dry_days = sum(water &lt; limit for water in soil)
+    return soil, dry_days, dry_days &lt;= 2
+
+
+def timed_simulation(rain: list[float], plant: Plant, temperature: float):
+    started = time.perf_counter_ns()
+    result = simulate(rain, plant, temperature)
+    elapsed = (time.perf_counter_ns() - started) / 1_000_000_000
+    return elapsed, result
+
+
+def main():
+    days = int(os.environ.get("GARDEN_DAYS", "1000000"))
+    repeats = int(os.environ.get("GARDEN_REPEATS", "5"))
+    if days &lt; 1:
+        raise ValueError("GARDEN_DAYS must be positive")
+    if repeats &lt; 1 or repeats % 2 == 0:
+        raise ValueError("GARDEN_REPEATS must be a positive odd number")
+
+    # Match the deterministic inputs generated in garden_week.jl.
+    rain = [((day * 37) % 500) / 100.0 for day in range(1, days + 1)]
+    plant = Lettuce()
+    temperature = 25.0
+    jit = getattr(sys, "_jit", None)
+    if jit is None or not hasattr(jit, "is_available") or not jit.is_available():
+        native_jit_status = "unavailable"
+    else:
+        native_jit_status = "enabled" if jit.is_enabled() else "available, disabled"
+
+    # In the measured CPython build the optional native JIT is unavailable.
+    time.perf_counter_ns()
+    gc.collect()
+    started = time.perf_counter_ns()
+    cold_result = simulate(rain, plant, temperature)
+    cold_seconds = (time.perf_counter_ns() - started) / 1_000_000_000
+
+    # Warm the interpreter path, then measure repeated runs after collecting garbage.
+    timed_simulation(rain, plant, temperature)
+    for _ in range(2):
+        gc.collect()
+        timed_simulation(rain, plant, temperature)
+
+    samples = []
+    result = cold_result
+    for _ in range(repeats):
+        gc.collect()
+        elapsed, result = timed_simulation(rain, plant, temperature)
+        samples.append(elapsed)
+
+    middle = (days - 1) // 2
+    print(
+        f"Python {platform.python_implementation()} {platform.python_version()} "
+        f"| days={days} | first_model_call_ms={cold_seconds * 1000:.3f} "
+        f"| warmed_median_ms={statistics.median(samples) * 1000:.3f} "
+        f"| repeats={repeats} | native_jit={native_jit_status}"
+    )
+    print(
+        f"CHECK dry_days={result[1]} first={result[0][0]:.6f} "
+        f"middle={result[0][middle]:.6f} last={result[0][-1]:.6f}"
+    )
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+                          </div>
+                        </details>
+                        <details class="garden-benchmark-source-details">
+                          <summary>View the Julia code used in the test</summary>
+                          <div class="garden-benchmark-source-content">
+                            <div class="garden-benchmark-source-header">
+                              <span>GARDEN_WEEK.JL / JULIA</span>
+                              <button class="copy-button garden-copy-button garden-benchmark-copy" type="button" data-copy-target="#garden-julia-benchmark-source" aria-label="Copy Julia benchmark code" title="Copy Julia code"><span aria-hidden="true">⧉</span><span data-copy-label>Copy Julia code</span></button>
+                            </div>
+                            <pre class="garden-benchmark-source-code"><code id="garden-julia-benchmark-source">using Printf
+
+abstract type Plant end
+struct Lettuce &lt;: Plant end
+struct Cactus &lt;: Plant end
+
+# Julia picks a threshold by dispatching on the plant's concrete type.
+dry_limit(::Lettuce) = 5.0
+dry_limit(::Cactus) = 2.0
+
+function simulate(rain::Vector{Float64}, plant::T, temperature::Float64) where {T &lt;: Plant}
+    evaporation = 0.1temperature
+
+    # Julia's dotted subtraction broadcasts across the array and creates a result vector.
+    daily_change = rain .- evaporation
+
+    soil = Vector{Float64}(undef, length(rain))
+    soil[1] = clamp(10.0 + daily_change[1], 0.0, 20.0)
+    for day in 2:length(rain)
+        soil[day] = clamp(soil[day - 1] + daily_change[day], 0.0, 20.0)
+    end
+
+    limit = dry_limit(plant)
+    dry_days = count(water -&gt; water &lt; limit, soil)
+    return (soil=soil, dry_days=dry_days, within_limit=dry_days &lt;= 2)
+end
+
+function timed_simulation(rain, plant, temperature)
+    started = time_ns()
+    result = simulate(rain, plant, temperature)
+    elapsed = (time_ns() - started) / 1.0e9
+    return elapsed, result
+end
+
+days = parse(Int, get(ENV, "GARDEN_DAYS", "1000000"))
+repeats = parse(Int, get(ENV, "GARDEN_REPEATS", "5"))
+@assert days &gt; 0 "GARDEN_DAYS must be positive"
+@assert repeats &gt; 0 &amp;&amp; isodd(repeats) "GARDEN_REPEATS must be a positive odd number"
+
+# Generate the same deterministic 0.00-4.99 mm pattern used by the Python version.
+rain = [Float64(mod(day * 37, 500)) / 100.0 for day in 1:days]
+plant = Lettuce()
+temperature = 25.0
+
+# This first call includes Julia's just-in-time compilation of simulate.
+time_ns()
+GC.gc()
+started = time_ns()
+cold_result = simulate(rain, plant, temperature)
+cold_seconds = (time_ns() - started) / 1.0e9
+
+# Warm the timing wrapper and model before collecting steady-state samples.
+timed_simulation(rain, plant, temperature)
+for _ in 1:2
+    GC.gc()
+    timed_simulation(rain, plant, temperature)
+end
+
+samples = Vector{Float64}(undef, repeats)
+for run in 1:repeats
+    GC.gc()
+    elapsed, _ = timed_simulation(rain, plant, temperature)
+    samples[run] = elapsed
+end
+sort!(samples)
+median_seconds = samples[(repeats + 1) ÷ 2]
+
+middle = (days + 1) ÷ 2
+@printf("Julia %s | days=%d | first_model_call_ms=%.3f | warmed_median_ms=%.3f | repeats=%d\n",
+        VERSION, days, cold_seconds * 1000, median_seconds * 1000, repeats)
+@printf("CHECK dry_days=%d first=%.6f middle=%.6f last=%.6f\n",
+        cold_result.dry_days, cold_result.soil[1], cold_result.soil[middle], cold_result.soil[end])</code></pre>
+                          </div>
+                        </details>
+                        <div class="garden-deep-dive-links">
+                          <a href="GARDEN/garden_week.jl">Julia benchmark source</a>
+                          <a href="GARDEN/garden_week.py">Python benchmark source</a>
+                          <a href="https://docs.julialang.org/en/v1/manual/performance-tips/" target="_blank" rel="noreferrer">Julia performance tips <span aria-hidden="true">↗</span></a>
+                          <a href="https://docs.python.org/3/library/timeit.html" target="_blank" rel="noreferrer">Python timing guidance <span aria-hidden="true">↗</span></a>
+                        </div>
+                        </section>
+                          </div>
+                          <div class="garden-benchmark-slide-controls">
+                            <button type="button" data-benchmark-previous disabled>Previous</button>
+                            <span aria-live="polite" data-benchmark-progress>Slide 1 of 4</span>
+                            <button type="button" data-benchmark-next>Next</button>
+                          </div>
+                        </div>
+                      </div>
+                    </details>
+                  </article>
+                </div>
+              </details>
+            </div>
+          </details>
+
+          <div class="project-experience" id="project-experience" hidden>
+            <button class="project-back" id="project-choose-again" type="button"><span aria-hidden="true">←</span> Choose another experiment</button>
+            <div class="project-heading">
+              <div><h2 id="project-title" tabindex="-1"></h2></div>
+              <p id="project-intro"></p>
+            </div>
+
+            <div class="project-layout project-view" id="project-panel-projectile" role="region" aria-labelledby="project-title" hidden>
+              <div class="project-code">
+                <div class="code-header"><span>PROJECTILE_MODEL.JL</span><span class="code-language">JULIA / BASE</span><button class="copy-button" type="button" data-copy-target="#project-code" aria-label="Copy projectile Julia code" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block project-code-block"><code id="project-code"></code></pre>
+                <div class="project-explainer">
+                  <div><span>01 / FUNCTION</span><p>Break the equations into named, reusable calculations. The last expression in a Julia function is its return value.</p></div>
+                  <div><span>02 / LOOP</span><p>Visit each sampled height and keep the largest value as the trajectory apex.</p></div>
+                  <div><span>03 / BROADCAST</span><p><code>.</code> before a function call applies it elementwise across an array.</p></div>
+                  <div><span>04 / CONDITION</span><p>Use an <code>if</code> expression to turn a numerical result into a field decision.</p></div>
+                </div>
+              </div>
+              <div class="project-output">
+                <div class="output-header"><span>SIMULATION OUTPUT</span><span class="output-live"><i></i> LIVE MODEL</span></div>
+                <div class="project-flight-controls" aria-label="Adjust projectile conditions">
+                  <label for="project-velocity-slider">
+                    <span>INITIAL SPEED</span><b><output id="project-velocity-value">32</output> m/s</b>
+                    <input id="project-velocity-slider" type="range" min="12" max="55" value="32" step="1">
+                  </label>
+                  <label for="project-angle-slider">
+                    <span>LAUNCH ANGLE</span><b><output id="project-angle-value">58</output>°</b>
+                    <input id="project-angle-slider" type="range" min="15" max="75" value="58" step="1">
+                  </label>
+                  <label for="project-gravity-slider">
+                    <span>GRAVITY</span><b><output id="project-gravity-value">9.81</output> m/s²</b>
+                    <input id="project-gravity-slider" type="range" min="1.62" max="15" value="9.81" step="0.01">
+                  </label>
+                  <div class="project-gravity-presets" role="group" aria-label="Set gravity for a planet">
+                    <span>ENVIRONMENT</span>
+                    <button type="button" data-gravity="9.81" class="is-selected" aria-pressed="true">Earth</button>
+                    <button type="button" data-gravity="1.62" aria-pressed="false">Moon</button>
+                    <button type="button" data-gravity="3.71" aria-pressed="false">Mars</button>
+                  </div>
+                </div>
+                <div class="project-canvas">
+                  <div class="project-metric"><span>LANDING STATUS</span><b id="landing-status">WITHIN FIELD</b></div>
+                  <svg id="project-plot" viewBox="0 0 500 300" role="img" aria-label="Final projectile simulation visualization">
+                    <g id="project-grid" class="plot-grid plot-grid-light"></g>
+                    <path class="flight-ground project-ground" d="M34 250H474"/>
+                    <path id="project-curve" class="flight-curve" d=""/>
+                    <path class="safe-zone" d="M34 255V260H420V255"/>
+                    <circle class="project-start" cx="34" cy="250" r="4"/>
+                    <g id="projectile-marker" class="projectile-marker" aria-hidden="true"><circle r="7"/><path d="M-12 0H12M0 -12V12"/></g>
+                    <circle id="project-end" class="flight-end" cx="0" cy="250" r="5"/>
+                    <text x="33" y="278">0 m</text><text x="392" y="278">FIELD LIMIT 150 m</text>
+                  </svg>
+                  <p class="output-caption">LIVE FROM PROJECT CONDITIONS</p>
+                </div>
+                <div class="project-result-grid"><div><span>RANGE</span><b><output id="project-range">93.8</output> m</b></div><div><span>FLIGHT TIME</span><b><output id="project-time">5.53</output> s</b></div><div><span>MAX HEIGHT</span><b><output id="project-height">37.5</output> m</b></div></div>
+                <button type="button" class="run-button" id="replay-flight"><span aria-hidden="true">▶</span> Replay trajectory</button>
+              </div>
+              <div class="project-completion">
+                <label class="project-completion-control">
+                  <input type="checkbox" data-project-completion="projectile" aria-controls="project-choice-projectile">
+                  <span>Mark this experiment complete</span>
+                </label>
+              </div>
+            </div>
+            <div class="project-layout project-view climate-view" id="project-panel-climate" role="region" aria-labelledby="project-title" hidden>
+              <div class="project-code">
+                <div class="code-header"><span>CLIMATE_TREND.JL</span><span class="code-language">JULIA / STATISTICS</span><button class="copy-button" type="button" data-copy-target="#climate-project-code" aria-label="Copy climate Julia code" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block project-code-block"><code id="climate-project-code"></code></pre>
+                <div class="project-explainer">
+                  <div><span>01 / PACKAGE</span><p><code>Statistics</code> supplies the mean for a compact summary of the readings.</p></div>
+                  <div><span>02 / ARRAYS</span><p>Year and anomaly arrays keep each observation aligned by position.</p></div>
+                  <div><span>03 / RATE</span><p>Divide the end-to-end change by the elapsed decades to compare the trend.</p></div>
+                  <div><span>04 / DECISION</span><p>An <code>if</code> expression labels the latest value against a teaching threshold.</p></div>
+                </div>
+              </div>
+              <div class="project-output climate-output">
+                <div class="output-header"><span>CLIMATE DATA ANALYZER</span><span class="output-live"><i></i> LIVE MODEL</span></div>
+                <div class="climate-controls">
+                  <label for="latest-anomaly"><span>2025 anomaly</span><b><output id="latest-anomaly-value">1.20</output> °C</b></label>
+                  <input id="latest-anomaly" type="range" min="0.8" max="1.8" value="1.2" step="0.05">
+                </div>
+                <div class="climate-chart-wrap">
+                  <svg id="climate-plot" viewBox="0 0 520 285" role="img" aria-label="Synthetic temperature anomalies from 2000 through 2025">
+                    <g id="climate-grid"></g>
+                    <path id="climate-area" class="climate-area" d=""></path>
+                    <path id="climate-line" class="climate-line" d=""></path>
+                    <g id="climate-points"></g>
+                    <g id="climate-labels"></g>
+                    <text class="climate-axis-title" x="18" y="24">ANOMALY °C</text>
+                  </svg>
+                </div>
+                <div class="climate-metrics">
+                  <div><span>MEAN ANOMALY</span><b><output id="climate-mean">0.70</output> °C</b></div>
+                  <div><span>CHANGE / DECADE</span><b><output id="climate-rate">0.31</output> °C</b></div>
+                  <div><span>THRESHOLD</span><b id="climate-assessment">BELOW</b></div>
+                </div>
+                <p class="output-caption">SYNTHETIC TEACHING DATA / NOT AN OFFICIAL CLIMATE RECORD</p>
+              </div>
+              <div class="project-completion">
+                <label class="project-completion-control">
+                  <input type="checkbox" data-project-completion="climate" aria-controls="project-choice-climate">
+                  <span>Mark this experiment complete</span>
+                </label>
+              </div>
+            </div>
+            <div class="project-layout project-view orbit-view" id="project-panel-orbit" role="region" aria-labelledby="project-title" hidden>
+              <div class="project-code">
+                <div class="code-header"><span>ORBITAL_MOTION.JL</span><span class="code-language">JULIA / NUMERICS</span><button class="copy-button" type="button" data-copy-target="#orbit-project-code" aria-label="Copy orbital mechanics Julia code" title="Copy code"><span aria-hidden="true">⧉</span></button></div>
+                <pre class="code-block project-code-block"><code id="orbit-project-code"></code></pre>
+                <div class="project-explainer">
+                  <div><span>01 / VARIABLES</span><p><code>distance</code>, <code>speed</code>, and <code>mu</code> are the initial conditions and gravitational parameter, in km and seconds.</p></div>
+                  <div><span>02 / FUNCTION</span><p><code>acceleration</code> applies Newton's inverse-square gravity toward the planet.</p></div>
+                  <div><span>03 / ARRAYS</span><p><code>positions</code> stores a 2D coordinate vector at each integration step.</p></div>
+                  <div><span>04 / LOOP</span><p>A velocity-Verlet loop advances position and velocity, appending each new sample.</p></div>
+                  <div><span>05 / MATH</span><p>Orbital energy and circular/escape speeds distinguish bound paths from escape. Speed starts tangent to the orbit.</p></div>
+                </div>
+              </div>
+              <div class="project-output orbit-output">
+                <div class="output-header"><span>ORBITAL MECHANICS</span><span class="output-live"><i></i> LIVE MODEL</span></div>
+                <div class="orbit-chart-wrap">
+                  <div class="orbit-status"><span>PATH CLASSIFICATION</span><b id="orbit-type" aria-live="polite">ELLIPTICAL ORBIT</b></div>
+                  <button class="orbit-animation-toggle" id="orbit-animation-toggle" type="button" aria-label="Pause orbital animation" title="Pause orbital animation"><span id="orbit-animation-icon" aria-hidden="true">Ⅱ</span></button>
+                  <svg id="orbit-plot" viewBox="0 0 620 400" role="img" aria-label="Satellite tracing an elliptical orbit around Earth">
+                    <g class="orbit-reference" aria-hidden="true">
+                      <circle cx="310" cy="200" r="55"></circle>
+                      <circle cx="310" cy="200" r="105"></circle>
+                      <circle cx="310" cy="200" r="150"></circle>
+                      <path d="M155 200H465M310 45V355"></path>
+                    </g>
+                    <circle id="orbit-earth-halo" class="orbit-earth-halo" cx="310" cy="200" r="70"></circle>
+                    <circle id="orbit-earth" class="orbit-earth" cx="310" cy="200" r="68"></circle>
+                    <path id="orbit-trajectory" class="orbit-trajectory" d=""></path>
+                    <circle id="orbit-origin" class="orbit-origin" cx="460" cy="200" r="3"></circle>
+                    <circle id="orbit-satellite-halo" class="orbit-satellite-halo" cx="460" cy="200" r="9"></circle>
+                    <circle id="orbit-satellite" class="orbit-satellite" cx="460" cy="200" r="4"></circle>
+                    <text class="orbit-earth-label" x="310" y="205" text-anchor="middle">EARTH</text>
+                    <text class="orbit-distance-label" x="310" y="378" text-anchor="middle">DISTANCE SHOWN TO SCALE</text>
+                  </svg>
+                  <div class="orbit-legend"><span><i class="legend-earth"></i>Earth</span><span><i class="legend-orbit"></i>Path</span><span><i class="legend-satellite"></i>Satellite</span></div>
+                </div>
+                <div class="orbit-presets" role="group" aria-label="Choose an orbital behavior">
+                  <button type="button" data-orbit-preset="circular">Stable orbit</button>
+                  <button type="button" data-orbit-preset="elliptical" class="is-selected">Elliptical</button>
+                  <button type="button" data-orbit-preset="escape">Escape</button>
+                </div>
+                <div class="orbit-controls">
+                  <label for="orbit-distance">
+                    <span>STARTING DISTANCE FROM EARTH'S CENTER</span><b><output id="orbit-distance-value">14,000</output> km</b>
+                    <input id="orbit-distance" type="range" min="8000" max="36000" value="14000" step="500">
+                  </label>
+                  <label for="orbit-speed">
+                    <span>INITIAL TANGENTIAL SPEED</span><b><output id="orbit-speed-value">4.70</output> km/s</b>
+                    <input id="orbit-speed" type="range" min="0.5" max="15" value="4.7" step="0.05">
+                  </label>
+                  <label for="orbit-gravity">
+                    <span>GRAVITATIONAL STRENGTH</span><b><output id="orbit-gravity-value">1.00</output> × Earth</b>
+                    <input id="orbit-gravity" type="range" min="0.5" max="1.5" value="1" step="0.05">
+                  </label>
+                </div>
+                <div class="orbit-metrics">
+                  <div><span>CIRCULAR SPEED</span><b><output id="orbit-circular-speed">5.34</output> km/s</b></div>
+                  <div><span>ESCAPE SPEED</span><b><output id="orbit-escape-speed">7.55</output> km/s</b></div>
+                  <div><span>IDEAL PERIOD</span><b><output id="orbit-period">3.38</output> h</b></div>
+                </div>
+                <p class="output-caption orbit-model-note">PLANAR TWO-BODY MODEL / POINT-MASS EARTH / FIXED 6371 KM IMPACT RADIUS. Tangential start; no atmosphere or perturbations. Spatially scaled path; accelerated animation.</p>
+              </div>
+              <div class="project-completion">
+                <label class="project-completion-control">
+                  <input type="checkbox" data-project-completion="orbit" aria-controls="project-choice-orbit">
+                  <span>Mark this experiment complete</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter part-two-chapter finish-section" id="mission-complete">
+        <div class="finish-inner">
+          <div class="finish-content">
+            <div><h2>Continue learning<br><span>Julia.</span></h2></div>
+            <div class="finish-summary"><p>Consult the Julia Manual for language details, find tutorials for guided practice, or install Julia to run the examples in a REPL.</p><div class="finish-links"><span>JULIA RESOURCES</span><a href="https://docs.julialang.org/en/v1/" target="_blank" rel="noreferrer">The Julia Manual <span aria-hidden="true">↗</span></a><a href="https://julialang.org/learning/" target="_blank" rel="noreferrer">Julia learning resources <span aria-hidden="true">↗</span></a><a href="https://julialang.org/downloads/" target="_blank" rel="noreferrer">Downloads and installation <span aria-hidden="true">↗</span></a></div></div>
+          </div>
+          <div class="finish-thank-you">
+            <button class="finish-thank-you-copy" id="open-thank-you-slide" type="button" aria-label="Show the full-screen thank-you slide" aria-haspopup="dialog" aria-controls="thank-you-slide-dialog">
+              Thank you for exploring Julia with us.
+            </button>
+          </div>
+          <dialog class="thank-you-dialog" id="thank-you-slide-dialog" aria-label="Thank-you slide">
+            <button class="thank-you-dialog-close" id="close-thank-you-slide" type="button" aria-label="Close thank-you slide" title="Close thank-you slide">×</button>
+            <img src="assets/julia-thank-you-slide.png" alt="The final Julia presentation slide: the words Thank You above four illustrated people bowing beneath gold stars." width="2880" height="1620">
+          </dialog>
+          <footer class="finish-footer"><a href="#top">RETURN TO JULIA SLIDES ↑</a></footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
